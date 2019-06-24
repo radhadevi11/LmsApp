@@ -12,15 +12,12 @@ public class WorkshopTester {
         try {
             entityManager.getTransaction().begin();
             //insert workshop object
-            Workshop workshop = new Workshop("class room", 30, 2, 20, 10, "BASIC", 2500);
-            entityManager.persist(workshop);
+
             //delete entity
-            entityManager.remove(workshop);
+
 
             entityManager.getTransaction().commit();
             //get the id of the persisted object
-            int id = workshop.getId();
-            System.out.println("the Id is "+id);
             //get the count of all the workshop object from the table
             Query query = entityManager.createQuery("select count(workshop) from Workshop workshop");
             System.out.println("The count is "+query.getSingleResult());

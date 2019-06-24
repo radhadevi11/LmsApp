@@ -12,6 +12,9 @@
                       value="jdbc:mysql://localhost/competition"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="radha"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+
         </properties>
     </persistence-unit>
 
