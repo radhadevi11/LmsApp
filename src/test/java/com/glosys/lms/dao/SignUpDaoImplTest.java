@@ -21,31 +21,28 @@ import static org.mockito.Mockito.mock;
 public class SignUpDaoImplTest {
     @InjectMocks
     @Spy
-    private SignUpDaoImpl signUpDao;
-    @Mock
-    EntityManagerFactory entityManagerFactory;
-    @Mock
-    EntityManager entityManager;
-    @Mock
-    Persistence Persistence;
+    private SignUpDaoImpl signUpDao ;
 
-
-    @Test
     @Ignore
+    @Test
     public void testSave(){
 
         SignUp signUp = mock(SignUp.class);
+        EntityManagerFactory entityManagerFactory = mock(EntityManagerFactory.class);
+        EntityManager entityManager = mock(EntityManager.class);
+        Persistence persistence = mock(Persistence.class);
+
 
         Mockito.doReturn(signUp).when(signUpDao).createObject(signUp);
-        Mockito.doReturn(entityManagerFactory).when(Persistence.createEntityManagerFactory("com.radha.lms"));
-        Mockito.doReturn(entityManager).when(entityManagerFactory.createEntityManager());
+        Mockito.doReturn(entityManagerFactory).when(persistence).createEntityManagerFactory("com.radha.lms");
+        Mockito.doReturn(entityManager).when(entityManagerFactory).createEntityManager();
         Mockito.doNothing().when(entityManager).getTransaction().begin();
         Mockito.doNothing().when(entityManager).persist(signUp);
         Mockito.doNothing().when(entityManager).getTransaction().commit();
 
         signUpDao.save(signUp);
 
-        Mockito.verify(Persistence.createEntityManagerFactory("com.radha.lms"));
+        Mockito.verify(persistence).createEntityManagerFactory("com.radha.lms");
         Mockito.verify(signUpDao).createObject(signUp);
         Mockito.verify(entityManagerFactory).createEntityManager();
         Mockito.verify(entityManager).getTransaction().begin();
