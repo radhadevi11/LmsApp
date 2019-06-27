@@ -9,7 +9,7 @@ public class LoginDaoTest {
     @Test
     public void testIsvalidUser(){
         LoginDao loginDao = new LoginDao();
-        boolean actual = loginDao.isValidUser("d@gmail","111");
+        boolean actual = loginDao.isValidUser("shalu@gmail.com","123");
         System.out.println("Result:"+actual);
         assertEquals(true,actual);
 

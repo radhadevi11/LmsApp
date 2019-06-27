@@ -1,12 +1,11 @@
 package com.glosys.lms.dao;
 
 
-import com.glosys.lms.SignUp;
+import com.glosys.lms.Student;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -18,44 +17,44 @@ import javax.persistence.Persistence;
 import static org.mockito.Mockito.mock;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SignUpDaoImplTest {
+public class StudentDaoImplTest {
     @InjectMocks
     @Spy
-    private SignUpDaoImpl signUpDao ;
+    private StudentDaoImpl signUpDao ;
 
     @Ignore
     @Test
     public void testSave(){
 
-        SignUp signUp = mock(SignUp.class);
+        Student student = mock(Student.class);
         EntityManagerFactory entityManagerFactory = mock(EntityManagerFactory.class);
         EntityManager entityManager = mock(EntityManager.class);
         Persistence persistence = mock(Persistence.class);
 
 
-        Mockito.doReturn(signUp).when(signUpDao).createObject(signUp);
+        Mockito.doReturn(student).when(signUpDao).createObject(student);
         Mockito.doReturn(entityManagerFactory).when(persistence).createEntityManagerFactory("com.radha.lms");
         Mockito.doReturn(entityManager).when(entityManagerFactory).createEntityManager();
         Mockito.doNothing().when(entityManager).getTransaction().begin();
-        Mockito.doNothing().when(entityManager).persist(signUp);
+        Mockito.doNothing().when(entityManager).persist(student);
         Mockito.doNothing().when(entityManager).getTransaction().commit();
 
-        signUpDao.save(signUp);
+        signUpDao.save(student);
 
         Mockito.verify(persistence).createEntityManagerFactory("com.radha.lms");
-        Mockito.verify(signUpDao).createObject(signUp);
+        Mockito.verify(signUpDao).createObject(student);
         Mockito.verify(entityManagerFactory).createEntityManager();
         Mockito.verify(entityManager).getTransaction().begin();
         Mockito.verify(entityManager).getTransaction().commit();
-        Mockito.verify(entityManager).persist(signUp);
+        Mockito.verify(entityManager).persist(student);
     }
 
     @Test
     public void SaveTest2(){
 
-        SignUpDaoImpl signUpDao = new SignUpDaoImpl();
+        StudentDaoImpl studentDao = new StudentDaoImpl();
 
-        signUpDao.save(new SignUp("Srinivasan","T","radha@gmail.com","KEC","radha","radha"));
+        studentDao.save(new Student("Radha","Devi","Female","abc@gmail.com", "KEC", "radha"));
     }
 
 

@@ -3,36 +3,38 @@ package com.glosys.lms;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "signup")
+@Table(name = "student")
 
-public class SignUp {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "signup_id")
+    @Column(name = "student_id")
     private Integer id;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    @Column(name = "gender")
+    private String gender;
     @Column(name = "mail_id")
     private String mailId;
     @Column(name = "college_name")
     private String collegeName;
     @Column (name = "passwordd")
     private String password;
-    @Column (name = "re_password")
-    private String rePassword;
 
-    public SignUp() {
+    public Student() {
     }
 
-    public SignUp(String firstName, String lastName, String mailId, String collegeName, String password, String rePassword) {
+
+    public Student(String firstName, String lastName, String gender, String mailId, String collegeName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gender = gender;
         this.mailId = mailId;
         this.collegeName = collegeName;
         this.password = password;
-        this.rePassword = rePassword;
+
     }
 
     public Integer getId() {
@@ -59,6 +61,10 @@ public class SignUp {
         this.lastName = lastName;
     }
 
+    public String getGender() { return gender; }
+
+    public void setGender(String gender) { this.gender = gender; }
+
     public String getMailId() {
         return mailId;
     }
@@ -83,11 +89,5 @@ public class SignUp {
         this.password = password;
     }
 
-    public String getRePassword() {
-        return rePassword;
-    }
 
-    public void setRePassword(String rePassword) {
-        this.rePassword = rePassword;
-    }
 }

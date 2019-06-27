@@ -5,11 +5,16 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public abstract class AbstractDao<T> implements Dao<T> {
+    protected EntityManager entityManager;
+
+    public AbstractDao() {
+        entityManager = DbConnection.getEntityManager();
+    }
+
     @Override
     public void save(T t){
 
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("com.radha.lms");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
         t = createObject(t);
 
         try {

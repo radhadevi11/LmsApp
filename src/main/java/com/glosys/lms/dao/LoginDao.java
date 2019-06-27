@@ -1,21 +1,26 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.SignUp;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class LoginDao {
+    protected EntityManager entityManager;
+
+    public LoginDao(){
+        entityManager = DbConnection.getEntityManager();
+
+    }
+
     public boolean isValidUser(String mailId, String password) {
         long count = 0;
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("com.radha.lms");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+
         try {
             entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select count(signup) from SignUp signup where signup.mailId=:mailId" +
-                    " and signup.password=:password");
+            Query query = entityManager.createQuery("select count(student) from Student student where student.mailId=:mailId" +
+                    " and student.password=:password");
             query.setParameter("mailId", mailId);
             query.setParameter("password", password);
             count = (long) query.getSingleResult();
