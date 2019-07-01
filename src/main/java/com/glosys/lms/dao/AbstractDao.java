@@ -30,7 +30,8 @@ public abstract class AbstractDao<T> implements Dao<T> {
         }
 
     }
-
     protected abstract T createObject(T t);
+
+
 
 }
