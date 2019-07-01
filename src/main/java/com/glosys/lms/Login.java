@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Login {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "signup_id")
+    @Column(name = "login_id")
     private Integer id;
     @Column(name = "mail_id")
     private String mailId;

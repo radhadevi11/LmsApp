@@ -1,17 +1,14 @@
 package com.glosys.lms.dao;
 
+import com.glosys.lms.Login;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-public class LoginDao {
-    protected EntityManager entityManager;
+public class LoginDao extends AbstractDao<Login>{
 
-    public LoginDao(){
-        entityManager = DbConnection.getEntityManager();
-
-    }
 
     public boolean isValidUser(String mailId, String password) {
         long count = 0;
@@ -42,4 +39,8 @@ public class LoginDao {
     }
 
 
+    @Override
+    protected Login createObject(Login login) {
+        return null;
+    }
 }

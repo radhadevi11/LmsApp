@@ -9,8 +9,9 @@ import static org.junit.Assert.*;
 public class CourseDaoTest {
     public static void main(String[] args) {
         CourseDao courseDao = new CourseDao();
-        List<Course> courseList = courseDao.getCoursesForWorkshop();
-        System.out.println(courseList);
+       // System.out.println(courseDao.getCoursesForWorkshop());
+        //System.out.println(courseDao.getCoursesForInplantTraining());
+        System.out.println(courseDao.getCoursesForCorporateTraining());
     }
 
 }

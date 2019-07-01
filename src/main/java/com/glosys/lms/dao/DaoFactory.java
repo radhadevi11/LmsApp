@@ -7,6 +7,9 @@ public class DaoFactory {
     private static TrainingProgramTypeDao trainingProgramTypeDao = new TrainingProgramTypeDao();
     private static WorkshopTypeDao workshopTypeDao = new WorkshopTypeDao();
     private static CourseDao courseDao = new CourseDao();
+    private static CourseCategoryDao courseCategoryDao = new CourseCategoryDao();
+    private static InplantTrainingTypeDao inplantTrainingTypeDao = new InplantTrainingTypeDao();
+    private static CorporateTrainingTypeDao corporateTrainingTypeDao = new CorporateTrainingTypeDao();
 
     public static StudentDaoImpl getStudentDao(){
         return studentDao;
@@ -24,5 +27,17 @@ public class DaoFactory {
 
     public static CourseDao getCourseDao() {
         return courseDao;
+    }
+
+    public static CourseCategoryDao getCourseCategoryDao() {
+        return courseCategoryDao;
+    }
+
+    public static InplantTrainingTypeDao getInplantTrainingTypeDao() {
+        return inplantTrainingTypeDao;
+    }
+
+    public static CorporateTrainingTypeDao getCorporateTrainingTypeDao() {
+        return corporateTrainingTypeDao;
     }
 }

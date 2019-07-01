@@ -14,6 +14,9 @@ public class Course {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "code")
+    private String code;
+
     @Column(name = "syllabus")
     private String syllabus;
 
@@ -36,9 +39,10 @@ public class Course {
 
     }
 
-    public Course(String name, String syllabus, Integer courseCategoryId, boolean workshopEligibility,
+    public Course(String name, String code, String syllabus, Integer courseCategoryId, boolean workshopEligibility,
                   boolean researchTrainingEligibility, boolean inplantTrainingEligibility, boolean corporateTrainingEligibility) {
         this.name = name;
+        this.code = code;
         this.syllabus = syllabus;
         this.courseCategoryId = courseCategoryId;
         this.workshopEligibility = workshopEligibility;
@@ -109,6 +113,14 @@ public class Course {
 
     public void setCorporateTrainingEligibility(boolean corporateTrainingEligibility) {
         this.corporateTrainingEligibility = corporateTrainingEligibility;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override
