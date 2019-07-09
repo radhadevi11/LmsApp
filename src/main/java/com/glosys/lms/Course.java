@@ -20,8 +20,10 @@ public class Course {
     @Column(name = "syllabus")
     private String syllabus;
 
-    @Column(name = "course_category_id")
-    private Integer courseCategoryId;
+    @ManyToOne
+    @JoinColumn(name = "course_category_id",
+            nullable=false, updatable=false)
+    private CourseCategory courseCategory;
 
     @Column(name = "workshop_eligibility")
     private boolean workshopEligibility;
@@ -39,12 +41,12 @@ public class Course {
 
     }
 
-    public Course(String name, String code, String syllabus, Integer courseCategoryId, boolean workshopEligibility,
+    public Course(String name, String code, String syllabus, CourseCategory courseCategory, boolean workshopEligibility,
                   boolean researchTrainingEligibility, boolean inplantTrainingEligibility, boolean corporateTrainingEligibility) {
         this.name = name;
         this.code = code;
         this.syllabus = syllabus;
-        this.courseCategoryId = courseCategoryId;
+        this.courseCategory = courseCategory;
         this.workshopEligibility = workshopEligibility;
         this.researchTrainingEligibility = researchTrainingEligibility;
         this.inplantTrainingEligibility = inplantTrainingEligibility;
@@ -75,12 +77,12 @@ public class Course {
         this.syllabus = syllabus;
     }
 
-    public Integer getCourseCategoryId() {
-        return courseCategoryId;
+    public CourseCategory getCourseCategory() {
+        return courseCategory;
     }
 
-    public void setCourseCategoryId(Integer courseCategoryId) {
-        this.courseCategoryId = courseCategoryId;
+    public void setCourseCategory(CourseCategory courseCategory) {
+        this.courseCategory = courseCategory;
     }
 
     public boolean isWorkshopEligibility() {
@@ -129,7 +131,7 @@ public class Course {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", syllabus='" + syllabus + '\'' +
-                ", courseCategoryId=" + courseCategoryId +
+                ", courseCategory=" + courseCategory +
                 ", workshopEligibility=" + workshopEligibility +
                 ", researchTrainingEligibility=" + researchTrainingEligibility +
                 ", inplantTrainingEligibility=" + inplantTrainingEligibility +

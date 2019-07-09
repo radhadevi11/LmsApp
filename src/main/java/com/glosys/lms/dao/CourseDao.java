@@ -9,10 +9,16 @@ import java.util.List;
 
 public class CourseDao extends AbstractDao<Course> {
 
-
     @Override
     protected Course createObject(Course course) {
-        return null;
+        return new Course(course.getName(),
+                course.getCode(),
+                course.getSyllabus(),
+                course.getCourseCategory(),
+                course.isWorkshopEligibility(),
+                course.isResearchTrainingEligibility(),
+                course.isInplantTrainingEligibility(),
+                course.isCorporateTrainingEligibility());
     }
     public List<Course> getCoursesForWorkshop() {
         try {
@@ -56,4 +62,30 @@ public class CourseDao extends AbstractDao<Course> {
             throw new RuntimeException("can not get courses for Inplant training",e);
         }
     }
+
+    public boolean isExistingCourse(String courseCode){
+        try {
+            entityManager.getTransaction().begin();
+            TypedQuery<Course> query = entityManager.createQuery("SELECT course FROM Course course" +
+                    " where course.code=:courseCode",Course.class);
+            query.setParameter("courseCode",courseCode);
+            entityManager.getTransaction().commit();
+            if(query.getResultList().size() == 0){
+                return false;
+            }
+            else{
+                return true;
+            }
+
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException("can not get courses ",e);
+        }
+
+
+
+    }
+
+
+
 }

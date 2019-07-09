@@ -16,6 +16,10 @@ public class CourseCategory {
     public CourseCategory() {
     }
 
+    public CourseCategory(Integer id) {
+        this.id = id;
+    }
+
     public CourseCategory(String name) {
         this.name = name;
     }
