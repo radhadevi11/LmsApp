@@ -14,9 +14,6 @@ public abstract class AbstractDao<T> implements Dao<T> {
     @Override
     public void save(T t){
 
-
-        t = createObject(t);
-
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(t);
@@ -30,7 +27,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
         }
 
     }
-    protected abstract T createObject(T t);
+
 
 
 

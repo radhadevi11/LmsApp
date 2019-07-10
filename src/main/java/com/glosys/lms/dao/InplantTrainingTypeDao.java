@@ -7,10 +7,7 @@ import java.util.List;
 
 public class InplantTrainingTypeDao extends AbstractDao<InplantTrainingType> {
 
-    @Override
-    protected InplantTrainingType createObject(InplantTrainingType inplantTrainingType) {
-        return null;
-    }
+
 
     public List<InplantTrainingType> getInplantTrainingTypes(){
         try {

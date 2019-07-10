@@ -7,10 +7,7 @@ import java.util.List;
 
 public class CourseCategoryDao extends AbstractDao<CourseCategory> {
 
-    @Override
-    protected CourseCategory createObject(CourseCategory courseCategory) {
-        return null;
-    }
+
 
     public List<CourseCategory> getCourseCategories(){
         try {

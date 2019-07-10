@@ -7,10 +7,7 @@ import java.util.List;
 
 public class WorkshopTypeDao extends AbstractDao<WorkshopType> {
 
-    @Override
-    protected WorkshopType createObject(WorkshopType workshopType) {
-        return null;
-    }
+
 
     public List<WorkshopType> getWorkshopTypes(){
         try{

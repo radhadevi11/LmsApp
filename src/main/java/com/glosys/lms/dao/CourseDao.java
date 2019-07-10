@@ -9,17 +9,7 @@ import java.util.List;
 
 public class CourseDao extends AbstractDao<Course> {
 
-    @Override
-    protected Course createObject(Course course) {
-        return new Course(course.getName(),
-                course.getCode(),
-                course.getSyllabus(),
-                course.getCourseCategory(),
-                course.isWorkshopEligibility(),
-                course.isResearchTrainingEligibility(),
-                course.isInplantTrainingEligibility(),
-                course.isCorporateTrainingEligibility());
-    }
+
     public List<Course> getCoursesForWorkshop() {
         try {
             entityManager.getTransaction().begin();

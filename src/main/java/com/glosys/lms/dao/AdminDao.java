@@ -5,10 +5,6 @@ import com.glosys.lms.Admin;
 import javax.persistence.Query;
 
 public class AdminDao extends AbstractDao<Admin> {
-    @Override
-    protected Admin createObject(Admin admin) {
-        return null;
-    }
 
     public boolean isValidAdmin(String name, String password) {
         long count = 0;

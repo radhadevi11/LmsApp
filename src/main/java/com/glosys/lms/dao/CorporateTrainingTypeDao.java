@@ -7,10 +7,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class CorporateTrainingTypeDao extends AbstractDao<CorporateTrainingType> {
-    @Override
-    protected CorporateTrainingType createObject(CorporateTrainingType corporateTrainingType) {
-        return null;
-    }
+
 
     public List<CorporateTrainingType> getCorporateTrainingTypes(){
         try {

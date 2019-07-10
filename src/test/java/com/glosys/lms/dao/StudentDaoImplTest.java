@@ -32,7 +32,6 @@ public class StudentDaoImplTest {
         Persistence persistence = mock(Persistence.class);
 
 
-        Mockito.doReturn(student).when(signUpDao).createObject(student);
         Mockito.doReturn(entityManagerFactory).when(persistence).createEntityManagerFactory("com.radha.lms");
         Mockito.doReturn(entityManager).when(entityManagerFactory).createEntityManager();
         Mockito.doNothing().when(entityManager).getTransaction().begin();
@@ -42,7 +41,7 @@ public class StudentDaoImplTest {
         signUpDao.save(student);
 
         Mockito.verify(persistence).createEntityManagerFactory("com.radha.lms");
-        Mockito.verify(signUpDao).createObject(student);
+
         Mockito.verify(entityManagerFactory).createEntityManager();
         Mockito.verify(entityManager).getTransaction().begin();
         Mockito.verify(entityManager).getTransaction().commit();

@@ -39,8 +39,5 @@ public class LoginDao extends AbstractDao<Login>{
     }
 
 
-    @Override
-    protected Login createObject(Login login) {
-        return null;
-    }
+
 }

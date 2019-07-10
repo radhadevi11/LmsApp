@@ -12,10 +12,7 @@ import java.util.List;
 public class TrainingProgramTypeDao extends AbstractDao<TrainingProgramType> {
 
 
-    @Override
-    protected TrainingProgramType createObject(TrainingProgramType trainingProgramType) {
-        return null;
-    }
+
 
     public List<TrainingProgramType> getTrainingProgramTypes(){
 
