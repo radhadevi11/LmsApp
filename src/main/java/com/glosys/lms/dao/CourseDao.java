@@ -3,11 +3,20 @@ package com.glosys.lms.dao;
 
 import com.glosys.lms.Course;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class CourseDao extends AbstractDao<Course> {
+
+    public CourseDao() {
+        super();
+    }
+
+    public CourseDao(EntityManager entityManager) {
+        super(entityManager);
+    }
 
 
     public List<Course> getCoursesForWorkshop() {

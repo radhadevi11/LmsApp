@@ -11,6 +11,10 @@ public abstract class AbstractDao<T> implements Dao<T> {
         entityManager = DbConnection.getEntityManager();
     }
 
+    public AbstractDao(EntityManager entityManager){
+        this.entityManager = entityManager;
+    }
+
     @Override
     public void save(T t){
 

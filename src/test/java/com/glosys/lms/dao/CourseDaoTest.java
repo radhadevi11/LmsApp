@@ -1,8 +1,9 @@
-/*package com.glosys.lms.dao;
+package com.glosys.lms.dao;
 
 import com.glosys.lms.Course;
 import com.glosys.lms.CourseCategory;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
@@ -44,11 +45,29 @@ public class CourseDaoTest {
 
     @Test
     public void testSave(){
-
-
-
-
+            CourseDao courseDao = new CourseDao(em);
+            CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
+        CourseCategory courseCategory = new CourseCategory("some course category");
+        courseCategoryDao.save(courseCategory);
+            courseDao.save(new Course("some course",
+                    "15sfgh",
+                    "some syllabus",
+                    courseCategory,
+                    true,
+                    false,
+                    true,
+                    false));
+        boolean actual = courseDao.isExistingCourse("15sfgh");
+        assertEquals(true, actual);
 
     }
 
-}*/
+    @Test
+    @Ignore
+    public void testIsExistingCourse(){
+        CourseDao courseDao = new CourseDao(em);
+        boolean actual = courseDao.isExistingCourse("15sfgh");
+        assertEquals(true, actual);
+    }
+
+}
