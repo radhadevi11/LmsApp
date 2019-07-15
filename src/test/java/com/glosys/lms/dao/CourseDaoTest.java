@@ -62,12 +62,74 @@ public class CourseDaoTest {
 
     }
 
+
     @Test
     @Ignore
-    public void testIsExistingCourse(){
+    public void testGetAllCourse(){
         CourseDao courseDao = new CourseDao(em);
-        boolean actual = courseDao.isExistingCourse("15sfgh");
-        assertEquals(true, actual);
+        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
+        CourseCategory courseCategory = new CourseCategory("some course category");
+        courseCategoryDao.save(courseCategory);
+        courseDao.save(new Course("some course",
+                "15sfgh",
+                "some syllabus",
+                courseCategory,
+                true,
+                false,
+                true,
+                false));
+        int actual = courseDao.getAllCourse().size();
+        System.out.println(actual);
+        assertEquals(1,actual);
+    }
+
+    @Test
+    public void testGetCourseByCourseId(){
+        CourseDao courseDao = new CourseDao(em);
+        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
+        CourseCategory courseCategory = new CourseCategory("some course category");
+        courseCategoryDao.save(courseCategory);
+        courseDao.save(new Course("some course",
+                "15sfgh",
+                "some syllabus",
+                courseCategory,
+                true,
+                false,
+                true,
+                false));
+        Course actual = courseDao.getCourseByCourseId(1);
+        assertEquals(actual.getCode(),"15sfgh");
+    }
+    @Test
+    public void testUpdate(){
+        CourseDao courseDao = new CourseDao(em);
+        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
+
+        CourseCategory courseCategory = new CourseCategory("some course category");
+        courseCategoryDao.save(courseCategory);
+        Course course = new Course("some course",
+                "15sfgh",
+                "some syllabus",
+                courseCategory,
+                true,
+                false,
+                true,
+                false);
+        courseDao.save(course);
+
+        Course updatedCourse = new Course("updated course",
+                "AD01",
+                "some syllabus",
+                courseCategory,
+                true,
+                false,
+                true,
+                true);
+
+        courseDao.updateCourseByCourseId(1,updatedCourse);
+        //assertEquals("updated course", courseDao.getCourseByCourseId(1).getName());
+       // assertEquals(true, course.isCorporateTrainingEligibility());
+
     }
 
 }

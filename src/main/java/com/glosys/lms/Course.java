@@ -41,8 +41,9 @@ public class Course {
 
     }
 
-    public Course(String name, String code, String syllabus, CourseCategory courseCategory, boolean workshopEligibility,
-                  boolean researchTrainingEligibility, boolean inplantTrainingEligibility, boolean corporateTrainingEligibility) {
+    public Course(Integer id, String name, String code, String syllabus, CourseCategory courseCategory,
+                  boolean workshopEligibility, boolean researchTrainingEligibility, boolean inplantTrainingEligibility, boolean corporateTrainingEligibility) {
+        this.id = id;
         this.name = name;
         this.code = code;
         this.syllabus = syllabus;
@@ -51,6 +52,12 @@ public class Course {
         this.researchTrainingEligibility = researchTrainingEligibility;
         this.inplantTrainingEligibility = inplantTrainingEligibility;
         this.corporateTrainingEligibility = corporateTrainingEligibility;
+    }
+
+    public Course(String name, String code, String syllabus, CourseCategory courseCategory, boolean workshopEligibility,
+                  boolean researchTrainingEligibility, boolean inplantTrainingEligibility, boolean corporateTrainingEligibility) {
+        this(null,name, code, syllabus, courseCategory, workshopEligibility, researchTrainingEligibility,
+                inplantTrainingEligibility, corporateTrainingEligibility);
     }
 
     public Integer getId() {

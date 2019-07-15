@@ -18,6 +18,68 @@ public class CourseDao extends AbstractDao<Course> {
         super(entityManager);
     }
 
+    public List<Course> getAllCourse(){
+        try {
+            entityManager.getTransaction().begin();
+            TypedQuery<Course> query = entityManager.createQuery("SELECT course FROM Course course",Course.class);
+            entityManager.getTransaction().commit();
+            return query.getResultList();
+
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException("can not get courses ",e);
+        }
+
+
+    }
+
+    public Course getCourseByCourseId(Integer courseId){
+        try {
+            entityManager.getTransaction().begin();
+            TypedQuery<Course> query = entityManager.createQuery("SELECT course FROM Course course" +
+                    " where course.id=:courseId",Course.class);
+            query.setParameter("courseId",courseId);
+            entityManager.getTransaction().commit();
+            return query.getSingleResult();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException("can not get course for "+courseId,e);
+        }
+
+    }
+
+    public void updateCourseByCourseId(Integer courseId, Course course){
+        try {
+            entityManager.getTransaction().begin();
+
+            Query query = entityManager.createQuery("UPDATE Course c SET c.name=:courseName, c.code=:courseCode, " +
+                    "c.syllabus=:syllabus,c.courseCategory=:courseCategory,c.workshopEligibility=:workshopEligibility," +
+                    "c.researchTrainingEligibility=:researchTrainingEligibility," +
+                    "c.inplantTrainingEligibility=:inplantTrainingEligibility," +
+                    " c.corporateTrainingEligibility=:corporateTrainingEligibility where c.id=:courseId");
+
+            query.setParameter("courseName", course.getName());
+            query.setParameter("courseCode", course.getCode());
+            query.setParameter("syllabus",course.getSyllabus());
+            query.setParameter("courseCategory",course.getCourseCategory());
+            query.setParameter("workshopEligibility",course.isWorkshopEligibility());
+            query.setParameter("researchTrainingEligibility", course.isResearchTrainingEligibility());
+            query.setParameter("inplantTrainingEligibility", course.isResearchTrainingEligibility());
+            query.setParameter("corporateTrainingEligibility", course.isCorporateTrainingEligibility());
+            query.setParameter("courseId",courseId);
+
+            int updateCount = query.executeUpdate();
+            entityManager.getTransaction().commit();
+            System.out.println("update count:"+updateCount);
+
+        } catch (Exception e) {
+                if(entityManager.getTransaction().isActive()){
+                    entityManager.getTransaction().rollback();
+                }
+                e.printStackTrace();
+            }
+    }
+
 
     public List<Course> getCoursesForWorkshop() {
         try {
