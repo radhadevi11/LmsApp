@@ -4,7 +4,6 @@ package com.glosys.lms.dao;
 import com.glosys.lms.Course;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -48,11 +47,14 @@ public class CourseDao extends AbstractDao<Course> {
 
     }
 
-    public void updateCourseByCourseId(Integer courseId, Course course){
+    public Course updateCourseByCourseId(Course course){
         try {
             entityManager.getTransaction().begin();
+            Course updatedCourse =  entityManager.merge(course);
+            entityManager.getTransaction().commit();
+            return  updatedCourse;
 
-            Query query = entityManager.createQuery("UPDATE Course c SET c.name=:courseName, c.code=:courseCode, " +
+            /*Query query = entityManager.createQuery("UPDATE Course c SET c.name=:courseName, c.code=:courseCode, " +
                     "c.syllabus=:syllabus,c.courseCategory=:courseCategory,c.workshopEligibility=:workshopEligibility," +
                     "c.researchTrainingEligibility=:researchTrainingEligibility," +
                     "c.inplantTrainingEligibility=:inplantTrainingEligibility," +
@@ -68,16 +70,14 @@ public class CourseDao extends AbstractDao<Course> {
             query.setParameter("corporateTrainingEligibility", course.isCorporateTrainingEligibility());
             query.setParameter("courseId",courseId);
 
-            int updateCount = query.executeUpdate();
-            entityManager.getTransaction().commit();
-            System.out.println("update count:"+updateCount);
+            int updateCount = query.executeUpdate();*/
+
+
 
         } catch (Exception e) {
-                if(entityManager.getTransaction().isActive()){
-                    entityManager.getTransaction().rollback();
-                }
-                e.printStackTrace();
-            }
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException("can not update courses for workshop",e);
+        }
     }
 
 

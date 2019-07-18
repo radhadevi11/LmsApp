@@ -16,7 +16,7 @@ public class CourseService {
 
    public Course getCourseByCourseId(Integer courseId){return DaoFactory.getCourseDao().getCourseByCourseId(courseId);}
 
-   public void updateCourseByCourseId(Integer courseId, Course course){
-      DaoFactory.getCourseDao().updateCourseByCourseId(courseId, course);
+   public void updateCourseByCourseId(Course course){
+      DaoFactory.getCourseDao().updateCourseByCourseId(course);
    }
 }

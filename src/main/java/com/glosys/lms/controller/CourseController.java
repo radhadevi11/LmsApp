@@ -18,7 +18,7 @@ public class CourseController {
 
     public Course getCourseByCourseId(Integer courseId){ return courseService.getCourseByCourseId(courseId);}
 
-    public void updateCourseByCourseId(Integer courseId, Course course){
-        courseService.updateCourseByCourseId(courseId, course);
+    public void updateCourseByCourseId(Course course){
+        courseService.updateCourseByCourseId(course);
     }
 }
