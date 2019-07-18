@@ -120,7 +120,21 @@ public class CourseDao extends AbstractDao<Course> {
 
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new RuntimeException("can not get courses for Inplant training",e);
+            throw new RuntimeException("can not get courses for Corporate Training",e);
+        }
+    }
+
+    public List<Course> getCoursesForResearchTraining(){
+        try {
+            entityManager.getTransaction().begin();
+            TypedQuery<Course> query = entityManager.createQuery("SELECT course FROM Course course" +
+                    " where course.researchTrainingEligibility=TRUE",Course.class);
+            entityManager.getTransaction().commit();
+            return query.getResultList();
+
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException("can not get courses for ResearchTraining",e);
         }
     }
 

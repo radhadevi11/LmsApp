@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+@Ignore
 public class CourseDaoTest {
     protected static EntityManagerFactory emf;
     protected static EntityManager em;
@@ -106,16 +107,7 @@ public class CourseDaoTest {
         CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
 
         CourseCategory courseCategory = new CourseCategory("some course category");
-        courseCategoryDao.save(courseCategory);
-        Course course = new Course("some course",
-                "15sfgh",
-                "some syllabus",
-                courseCategory,
-                true,
-                false,
-                true,
-                false);
-        courseDao.save(course);
+        Course course = getCourse(courseDao, courseCategoryDao, courseCategory);
 
         Course updatedCourse = new Course(1,"updated course",
                 "AD01",
@@ -132,5 +124,21 @@ public class CourseDaoTest {
         assertEquals(true, course.isCorporateTrainingEligibility());
 
     }
+
+    private Course getCourse(CourseDao courseDao, CourseCategoryDao courseCategoryDao, CourseCategory courseCategory) {
+        courseCategoryDao.save(courseCategory);
+        Course course = new Course("some course",
+                "15sfgh",
+                "some syllabus",
+                courseCategory,
+                true,
+                false,
+                true,
+                false);
+        courseDao.save(course);
+        return course;
+    }
+
+   // public void test
 
 }

@@ -8,6 +8,7 @@
         <!-- add classes -->
         <class>com.glosys.lms.Course</class>
         <class>com.glosys.lms.CourseCategory</class>
+        <class>com.glosys.lms.ResearchTraining</class>
 
         <properties>
             <!-- Configuring JDBC properties -->
