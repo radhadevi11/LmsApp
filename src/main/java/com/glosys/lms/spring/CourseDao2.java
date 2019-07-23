@@ -1,19 +1,20 @@
-package com.glosys.lms.dao;
+package com.glosys.lms.spring;
 
 
 import com.glosys.lms.Course;
+import com.glosys.lms.dao.AbstractDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class CourseDao extends AbstractDao<Course> {
+@Component
+public class CourseDao2 extends AbstractDao<Course> {
 
-    public CourseDao() {
-        super();
-    }
-
-    public CourseDao(EntityManager entityManager) {
+   @Autowired
+    public CourseDao2(EntityManager entityManager) {
         super(entityManager);
     }
 

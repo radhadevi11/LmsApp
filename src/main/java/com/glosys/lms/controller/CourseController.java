@@ -21,4 +21,7 @@ public class CourseController {
     public void updateCourseByCourseId(Course course){
         courseService.updateCourseByCourseId(course);
     }
+    public void deleteCourse(Integer courseId){
+        courseService.deleteCourse(courseId);
+    }
 }

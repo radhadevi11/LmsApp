@@ -9,6 +9,7 @@
         <class>com.glosys.lms.Course</class>
         <class>com.glosys.lms.CourseCategory</class>
         <class>com.glosys.lms.ResearchTraining</class>
+        <class>com.glosys.lms.TrainingProgramType</class>
 
         <properties>
             <!-- Configuring JDBC properties -->

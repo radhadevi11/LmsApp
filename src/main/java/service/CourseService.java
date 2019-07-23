@@ -19,4 +19,8 @@ public class CourseService {
    public void updateCourseByCourseId(Course course){
       DaoFactory.getCourseDao().updateCourseByCourseId(course);
    }
+
+   public void deleteCourse(Integer courseId){
+      DaoFactory.getCourseDao().deleteCourse(courseId);
+   }
 }
