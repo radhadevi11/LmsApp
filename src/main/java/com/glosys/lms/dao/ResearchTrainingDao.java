@@ -24,6 +24,7 @@ public class ResearchTrainingDao extends AbstractDao<ResearchTraining> {
             return typedQuery.getResultList();
         }
         catch (Exception e){
+
             entityManager.getTransaction().rollback();
             throw new RuntimeException("can not get ResearchTrainings", e);
         }

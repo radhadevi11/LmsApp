@@ -23,22 +23,21 @@ public class ResearchTraining {
     @Column(name = "mode_of_training")
     private String modeOfTraining;
 
-    @ManyToOne
-    @JoinColumn(name = " training_program_type_id",
-            nullable=false, updatable=false)
-    private TrainingProgramType trainingProgramType;
+    @Column(name = "training_program_type_id")
+    @Enumerated
+    private TrainingProgramTypeEnum trainingProgramType;
 
     public ResearchTraining() {
 
     }
 
 
-    public ResearchTraining(String duration, double cost, int noOfCourses, String modeOfTraining, TrainingProgramType trainingProgramType) {
+    public ResearchTraining(String duration, double cost, int noOfCourses, String modeOfTraining, TrainingProgramTypeEnum trainingProgramType) {
         this(null,duration, cost, noOfCourses , modeOfTraining, trainingProgramType);
     }
 
     public ResearchTraining(Integer id, String duration, double cost, int noOfCourses, String modeOfTraining,
-                            TrainingProgramType trainingProgramType) {
+                            TrainingProgramTypeEnum trainingProgramType) {
         this.id = id;
         this.duration = duration;
         this.cost = cost;
@@ -87,11 +86,11 @@ public class ResearchTraining {
         this.modeOfTraining = modeOfTraining;
     }
 
-    public TrainingProgramType getTrainingProgramType() {
+    public TrainingProgramTypeEnum getTrainingProgramType() {
         return trainingProgramType;
     }
 
-    public void setTrainingProgramType(TrainingProgramType trainingProgramType) {
+    public void setTrainingProgramType(TrainingProgramTypeEnum trainingProgramType) {
         this.trainingProgramType = trainingProgramType;
     }
 }
