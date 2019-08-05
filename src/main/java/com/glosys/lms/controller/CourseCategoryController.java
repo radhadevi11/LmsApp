@@ -1,7 +1,7 @@
 package com.glosys.lms.controller;
 
-import com.glosys.lms.CourseCategory;
-import service.CourseCategoryService;
+import com.glosys.lms.entity.CourseCategory;
+import com.glosys.lms.service.CourseCategoryService;
 
 import java.util.List;
 

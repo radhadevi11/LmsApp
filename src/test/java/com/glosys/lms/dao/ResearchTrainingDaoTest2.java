@@ -1,6 +1,6 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.ResearchTraining;
+import com.glosys.lms.entity.ResearchTraining;
 import org.junit.Test;
 
 import java.util.List;

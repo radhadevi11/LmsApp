@@ -1,7 +1,7 @@
 package com.glosys.lms.controller;
 
 import com.glosys.lms.model.InplantTrainingInfo;
-import service.InplantTrainingService;
+import com.glosys.lms.service.InplantTrainingService;
 
 public class InplantTrainingController {
     private static InplantTrainingService inplantTrainingService = new InplantTrainingService();

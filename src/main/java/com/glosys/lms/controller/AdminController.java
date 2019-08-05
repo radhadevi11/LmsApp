@@ -1,6 +1,6 @@
 package com.glosys.lms.controller;
 
-import service.AdminService;
+import com.glosys.lms.service.AdminService;
 
 public class AdminController {
     private static AdminService adminService = new AdminService();

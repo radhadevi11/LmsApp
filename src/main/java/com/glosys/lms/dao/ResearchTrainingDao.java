@@ -1,6 +1,6 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.ResearchTraining;
+import com.glosys.lms.entity.ResearchTraining;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -19,13 +19,18 @@ public class ResearchTrainingDao extends AbstractDao<ResearchTraining> {
     public List<ResearchTraining> getResearchTrainings(){
         try{
             entityManager.getTransaction().begin();
-            TypedQuery<ResearchTraining> typedQuery = entityManager.createQuery("SELECT rt FROM ResearchTraining rt",ResearchTraining.class);
+            TypedQuery<ResearchTraining> typedQuery = entityManager.createQuery("SELECT rt FROM ResearchTraining rt",
+                    ResearchTraining.class);
             entityManager.getTransaction().commit();
-            return typedQuery.getResultList();
+            List<ResearchTraining> resultList = typedQuery.getResultList();
+            System.out.println("size of Research training "+resultList.size());
+            return resultList;
+
         }
         catch (Exception e){
-
-            entityManager.getTransaction().rollback();
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
             throw new RuntimeException("can not get ResearchTrainings", e);
         }
     }

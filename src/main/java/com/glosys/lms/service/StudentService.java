@@ -1,6 +1,6 @@
-package service;
+package com.glosys.lms.service;
 
-import com.glosys.lms.Student;
+import com.glosys.lms.entity.Student;
 import com.glosys.lms.dao.DaoFactory;
 
 public class StudentService {

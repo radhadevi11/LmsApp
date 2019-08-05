@@ -1,4 +1,4 @@
-package service;
+package com.glosys.lms.service;
 
 import com.glosys.lms.dao.DaoFactory;
 

@@ -1,7 +1,6 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.CorporateTrainingType;
-import com.glosys.lms.InplantTrainingType;
+import com.glosys.lms.entity.CorporateTrainingType;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -18,7 +17,9 @@ public class CorporateTrainingTypeDao extends AbstractDao<CorporateTrainingType>
             return query.getResultList();
         }
         catch (Exception e){
-            entityManager.getTransaction().rollback();
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
             throw new RuntimeException("can not get CorporateTrainingType",e);
         }
     }

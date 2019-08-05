@@ -1,7 +1,7 @@
 package com.glosys.lms.dao;
 
 
-import com.glosys.lms.Course;
+import com.glosys.lms.entity.Course;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -25,7 +25,9 @@ public class CourseDao extends AbstractDao<Course> {
             return query.getResultList();
 
         } catch (Exception e) {
-            entityManager.getTransaction().rollback();
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
             throw new RuntimeException("can not get courses ",e);
         }
 
@@ -41,7 +43,9 @@ public class CourseDao extends AbstractDao<Course> {
             entityManager.getTransaction().commit();
             return query.getSingleResult();
         } catch (Exception e) {
-            entityManager.getTransaction().rollback();
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
             throw new RuntimeException("can not get course for "+courseId,e);
         }
 
@@ -75,7 +79,9 @@ public class CourseDao extends AbstractDao<Course> {
 
 
         } catch (Exception e) {
-            entityManager.getTransaction().rollback();
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
             throw new RuntimeException("can not update courses for workshop",e);
         }
     }
@@ -90,7 +96,9 @@ public class CourseDao extends AbstractDao<Course> {
             return query.getResultList();
 
         } catch (Exception e) {
-            entityManager.getTransaction().rollback();
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
            throw new RuntimeException("can not get courses for workshop",e);
         }
 
@@ -105,7 +113,9 @@ public class CourseDao extends AbstractDao<Course> {
             return query.getResultList();
 
         } catch (Exception e) {
-            entityManager.getTransaction().rollback();
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
             throw new RuntimeException("can not get courses for Inplant training",e);
         }
     }
@@ -119,7 +129,9 @@ public class CourseDao extends AbstractDao<Course> {
             return query.getResultList();
 
         } catch (Exception e) {
-            entityManager.getTransaction().rollback();
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
             throw new RuntimeException("can not get courses for Corporate Training",e);
         }
     }
@@ -133,7 +145,9 @@ public class CourseDao extends AbstractDao<Course> {
             return query.getResultList();
 
         } catch (Exception e) {
-            entityManager.getTransaction().rollback();
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
             throw new RuntimeException("can not get courses for ResearchTraining",e);
         }
     }
@@ -153,7 +167,9 @@ public class CourseDao extends AbstractDao<Course> {
             }
 
         } catch (Exception e) {
-            entityManager.getTransaction().rollback();
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
             throw new RuntimeException("can not get courses ",e);
         }
 

@@ -1,10 +1,8 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.CourseCategory;
+import com.glosys.lms.entity.CourseCategory;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class CourseCategoryDaoTest {
     public static void main(String[] args) {

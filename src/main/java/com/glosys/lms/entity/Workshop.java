@@ -1,4 +1,4 @@
-package com.glosys.lms;
+package com.glosys.lms.entity;
 
 import javax.persistence.*;
 

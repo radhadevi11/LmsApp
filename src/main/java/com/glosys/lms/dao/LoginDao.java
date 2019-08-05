@@ -1,10 +1,7 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.Login;
+import com.glosys.lms.entity.Login;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class LoginDao extends AbstractDao<Login>{
@@ -25,6 +22,9 @@ public class LoginDao extends AbstractDao<Login>{
 
         }
         catch (Exception e){
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
             e.printStackTrace();
         }
 

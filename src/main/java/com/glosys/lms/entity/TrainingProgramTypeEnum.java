@@ -1,7 +1,7 @@
-package com.glosys.lms;
+package com.glosys.lms.entity;
 
 public enum TrainingProgramTypeEnum {
-
+    DUMMY(0,"dummy"),
     WORKSHOP(1, "Workshop"),
     INPLANT_TRAINING(2, "Inplant Training"),
     CORPORATE_TRAINING(3, "Corporate Training"),

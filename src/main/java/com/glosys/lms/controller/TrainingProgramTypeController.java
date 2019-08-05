@@ -1,7 +1,7 @@
 package com.glosys.lms.controller;
 
-import com.glosys.lms.TrainingProgramType;
-import service.TrainingProgramTypeService;
+import com.glosys.lms.entity.TrainingProgramType;
+import com.glosys.lms.service.TrainingProgramTypeService;
 
 import java.util.List;
 

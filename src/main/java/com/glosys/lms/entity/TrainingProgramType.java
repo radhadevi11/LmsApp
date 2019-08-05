@@ -1,26 +1,23 @@
-package com.glosys.lms;
+package com.glosys.lms.entity;
 
 import javax.persistence.*;
-@Table(name = "course_category")
-@Entity
 
-public class CourseCategory {
+@Entity
+@Table(name = "training_program_type")
+
+public class TrainingProgramType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_category_id")
+    @Column(name = "training_program_type_id")
     private Integer id;
 
     @Column(name = "name")
     private String name;
 
-    public CourseCategory() {
+    public TrainingProgramType() {
     }
 
-    public CourseCategory(Integer id) {
-        this.id = id;
-    }
-
-    public CourseCategory(String name) {
+    public TrainingProgramType(String name) {
         this.name = name;
     }
 
@@ -38,13 +35,5 @@ public class CourseCategory {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "CourseCategory{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

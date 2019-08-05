@@ -1,7 +1,7 @@
 package com.glosys.lms.model;
 
-import com.glosys.lms.Course;
-import com.glosys.lms.InplantTrainingType;
+import com.glosys.lms.entity.Course;
+import com.glosys.lms.entity.InplantTrainingType;
 
 import java.util.List;
 

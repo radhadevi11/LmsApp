@@ -1,6 +1,6 @@
-package service;
+package com.glosys.lms.service;
 
-import com.glosys.lms.CourseCategory;
+import com.glosys.lms.entity.CourseCategory;
 import com.glosys.lms.dao.DaoFactory;
 
 import java.util.List;

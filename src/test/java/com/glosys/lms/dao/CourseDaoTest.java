@@ -1,10 +1,8 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.Course;
-import com.glosys.lms.CourseCategory;
+import com.glosys.lms.entity.Course;
+import com.glosys.lms.entity.CourseCategory;
 import org.dbunit.JdbcDatabaseTester;
-import org.dbunit.database.DatabaseDataSet;
-import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.junit.*;
 

@@ -6,10 +6,10 @@
     <persistence-unit name="lms-app-test" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <!-- add classes -->
-        <class>com.glosys.lms.Course</class>
-        <class>com.glosys.lms.CourseCategory</class>
-        <class>com.glosys.lms.ResearchTraining</class>
-        <class>com.glosys.lms.TrainingProgramType</class>
+        <class>com.glosys.lms.entity.Course</class>
+        <class>com.glosys.lms.entity.CourseCategory</class>
+        <class>com.glosys.lms.entity.ResearchTraining</class>
+        <class>com.glosys.lms.entity.TrainingProgramType</class>
 
         <properties>
             <!-- Configuring JDBC properties -->

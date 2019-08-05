@@ -2,9 +2,7 @@ package com.glosys.lms.controller;
 
 
 import com.glosys.lms.model.WorkshopInfo;
-import service.WorkshopService;
-
-import java.util.List;
+import com.glosys.lms.service.WorkshopService;
 
 public class WorkshopController {
     private static WorkshopService workshopService = new WorkshopService();

@@ -1,19 +1,21 @@
-package com.glosys.lms;
+package com.glosys.lms.entity;
 
 import javax.persistence.*;
-@Table(name = "workshop_type")
+
 @Entity
-public class WorkshopType {
+@Table(name = "inplant_training_type")
+
+public class InplantTrainingType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "workshop_type_id")
+    @Column(name = "inplant_training_type_id")
     private Integer id;
 
     @Column(name = " mode_of_training")
     private String modeOfTraining;
 
-    @Column(name = "no_of_workshops ")
-    private int noOfWorkshops;
+    @Column(name = "no_of_programs ")
+    private int noOfPrograms;
 
     @Column(name = "total_days")
     private int totalDays;
@@ -25,31 +27,24 @@ public class WorkshopType {
     private int hoursPerDay;
 
     @Column(name = "package")
-    private String workshopPackage;
+    private String inplantPackage;
 
     @Column(name = "cost")
     private double cost;
 
-    public WorkshopType() {
+    public InplantTrainingType() {
+
     }
 
-    public WorkshopType(String modeOfTraining, int noOfWorkshops, int totalDays,
-                        int totalHours, int hoursPerDay, String workshopPackage, double cost) {
+    public InplantTrainingType(String modeOfTraining, int noOfPrograms, int totalDays, int totalHours,
+                               int hoursPerDay, String inplantPackage, double cost) {
         this.modeOfTraining = modeOfTraining;
-        this.noOfWorkshops = noOfWorkshops;
+        this.noOfPrograms = noOfPrograms;
         this.totalDays = totalDays;
         this.totalHours = totalHours;
         this.hoursPerDay = hoursPerDay;
-        this.workshopPackage = workshopPackage;
+        this.inplantPackage = inplantPackage;
         this.cost = cost;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getModeOfTraining() {
@@ -60,12 +55,12 @@ public class WorkshopType {
         this.modeOfTraining = modeOfTraining;
     }
 
-    public int getNoOfWorkshops() {
-        return noOfWorkshops;
+    public int getNoOfPrograms() {
+        return noOfPrograms;
     }
 
-    public void setNoOfWorkshops(int noOfWorkshops) {
-        this.noOfWorkshops = noOfWorkshops;
+    public void setNoOfPrograms(int noOfPrograms) {
+        this.noOfPrograms = noOfPrograms;
     }
 
     public int getTotalDays() {
@@ -92,12 +87,12 @@ public class WorkshopType {
         this.hoursPerDay = hoursPerDay;
     }
 
-    public String getWorkshopPackage() {
-        return workshopPackage;
+    public String getInplantPackage() {
+        return inplantPackage;
     }
 
-    public void setWorkshopPackage(String workshopPackage) {
-        this.workshopPackage = workshopPackage;
+    public void setInplantPackage(String inplantPackage) {
+        this.inplantPackage = inplantPackage;
     }
 
     public double getCost() {
@@ -110,16 +105,15 @@ public class WorkshopType {
 
     @Override
     public String toString() {
-        return "WorkshopType{" +
+        return "InplantTrainingType{" +
                 "id=" + id +
                 ", modeOfTraining='" + modeOfTraining + '\'' +
-                ", noOfWorkshops=" + noOfWorkshops +
+                ", noOfPrograms=" + noOfPrograms +
                 ", totalDays=" + totalDays +
                 ", totalHours=" + totalHours +
                 ", hoursPerDay=" + hoursPerDay +
-                ", workshopPackage='" + workshopPackage + '\'' +
+                ", inplantPackage='" + inplantPackage + '\'' +
                 ", cost=" + cost +
                 '}';
     }
 }
-

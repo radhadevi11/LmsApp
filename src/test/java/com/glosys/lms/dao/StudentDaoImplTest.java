@@ -1,7 +1,7 @@
 package com.glosys.lms.dao;
 
 
-import com.glosys.lms.Student;
+import com.glosys.lms.entity.Student;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;

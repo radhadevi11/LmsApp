@@ -1,6 +1,6 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.Admin;
+import com.glosys.lms.entity.Admin;
 
 import javax.persistence.Query;
 
@@ -21,7 +21,9 @@ public class AdminDao extends AbstractDao<Admin> {
 
         }
         catch (Exception e){
-            entityManager.getTransaction().rollback();
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
             e.printStackTrace();
         }
 

@@ -1,7 +1,7 @@
 package com.glosys.lms.controller;
 
-import com.glosys.lms.Course;
-import service.CourseService;
+import com.glosys.lms.entity.Course;
+import com.glosys.lms.service.CourseService;
 
 import java.util.List;
 

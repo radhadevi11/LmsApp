@@ -1,10 +1,8 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.WorkshopType;
+import com.glosys.lms.entity.WorkshopType;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class WorkshopTypeDaoTest {
     public static void main(String[] args) {

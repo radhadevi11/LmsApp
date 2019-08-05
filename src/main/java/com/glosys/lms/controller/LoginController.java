@@ -1,6 +1,6 @@
 package com.glosys.lms.controller;
 
-import service.LoginService;
+import com.glosys.lms.service.LoginService;
 
 public class LoginController {
 
