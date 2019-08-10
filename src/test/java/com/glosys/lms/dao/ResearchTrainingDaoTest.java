@@ -43,8 +43,9 @@ public class ResearchTrainingDaoTest {
     @Test
     public void testGetResearchTrainings(){
         ResearchTrainingDao researchTrainingDao = new ResearchTrainingDao(em);
+        researchTrainingDao.save(new ResearchTraining(1));
         List<ResearchTraining> actual = researchTrainingDao.getResearchTrainings();
-        assertEquals(0, actual.size());
+        assertEquals(1, actual.size());
 
     }
 

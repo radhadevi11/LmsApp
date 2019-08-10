@@ -9,7 +9,9 @@
         <class>com.glosys.lms.entity.Course</class>
         <class>com.glosys.lms.entity.CourseCategory</class>
         <class>com.glosys.lms.entity.ResearchTraining</class>
-        <class>com.glosys.lms.entity.TrainingProgramType</class>
+        <class>com.glosys.lms.entity.Student</class>
+        <class>com.glosys.lms.entity.WorkshopType</class>
+        <class>com.glosys.lms.entity.WorkshopEnrolment</class>
 
         <properties>
             <!-- Configuring JDBC properties -->
@@ -17,7 +19,7 @@
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
 
             <!-- Hibernate properties -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
             <property name="hibernate.hbm2ddl.auto" value="validate"/>
             <property name="hibernate.format_sql" value="false"/>
             <property name="hibernate.show_sql" value="true"/>

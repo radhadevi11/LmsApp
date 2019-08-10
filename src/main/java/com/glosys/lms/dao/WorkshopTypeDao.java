@@ -2,11 +2,19 @@ package com.glosys.lms.dao;
 
 import com.glosys.lms.entity.WorkshopType;
 
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class WorkshopTypeDao extends AbstractDao<WorkshopType> {
 
+    public WorkshopTypeDao(){
+        super();
+    }
+
+    public WorkshopTypeDao(EntityManager entityManager){
+        super(entityManager);
+    }
 
 
     public List<WorkshopType> getWorkshopTypes(){

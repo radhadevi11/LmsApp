@@ -10,37 +10,24 @@ public class Workshop {
     @Column(name = "workshop_id")
     private Integer id;
 
-    @Column(name = "training_program_type_id")
-    private Integer trainingProgramTypeId;
-
-    @Column(name = "workshop_type_id")
-    private Integer workshopTypeId;
+    @ManyToOne
+    @JoinColumn(name = "workshop_type_id")
+    private WorkshopType workshopType;
 
 
     public Workshop() {
     }
 
-    public Integer getId() {
-        return id;
+    public Workshop(WorkshopType workshopType) {
+        this(null, workshopType);
     }
 
-    public void setId(Integer id) {
+    public Workshop(Integer id, WorkshopType workshopType) {
         this.id = id;
+        this.workshopType = workshopType;
     }
 
-    public Integer getTrainingProgramTypeId() {
-        return trainingProgramTypeId;
-    }
-
-    public void setTrainingProgramTypeId(Integer trainingProgramTypeId) {
-        this.trainingProgramTypeId = trainingProgramTypeId;
-    }
-
-    public Integer getWorkshopTypeId() {
-        return workshopTypeId;
-    }
-
-    public void setWorkshopTypeId(Integer workshopTypeId) {
-        this.workshopTypeId = workshopTypeId;
+    public Workshop(Integer id) {
+        this.id = id;
     }
 }

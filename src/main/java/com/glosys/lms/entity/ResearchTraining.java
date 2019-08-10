@@ -23,27 +23,27 @@ public class ResearchTraining {
     @Column(name = "mode_of_training")
     private String modeOfTraining;
 
-    @Column(name = "training_program_type_id")
-    @Enumerated
-    private TrainingProgramTypeEnum trainingProgramType;
 
     public ResearchTraining() {
 
     }
 
 
-    public ResearchTraining(String duration, double cost, int noOfCourses, String modeOfTraining, TrainingProgramTypeEnum trainingProgramType) {
-        this(null,duration, cost, noOfCourses , modeOfTraining, trainingProgramType);
+    public ResearchTraining(String duration, double cost, int noOfCourses, String modeOfTraining) {
+        this(null,duration, cost, noOfCourses , modeOfTraining);
     }
 
-    public ResearchTraining(Integer id, String duration, double cost, int noOfCourses, String modeOfTraining,
-                            TrainingProgramTypeEnum trainingProgramType) {
+    public ResearchTraining(Integer id, String duration, double cost, int noOfCourses, String modeOfTraining) {
         this.id = id;
         this.duration = duration;
         this.cost = cost;
         this.noOfCourses = noOfCourses;
         this.modeOfTraining = modeOfTraining;
-        this.trainingProgramType = trainingProgramType;
+
+    }
+
+    public ResearchTraining(Integer id) {
+        this.id = id;
     }
 
     public Integer getId() {
@@ -86,11 +86,4 @@ public class ResearchTraining {
         this.modeOfTraining = modeOfTraining;
     }
 
-    public TrainingProgramTypeEnum getTrainingProgramType() {
-        return trainingProgramType;
-    }
-
-    public void setTrainingProgramType(TrainingProgramTypeEnum trainingProgramType) {
-        this.trainingProgramType = trainingProgramType;
-    }
 }

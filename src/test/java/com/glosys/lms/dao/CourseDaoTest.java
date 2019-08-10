@@ -28,8 +28,7 @@ public class CourseDaoTest {
     @Before
     public  void setUp() throws Exception {
         JdbcDatabaseTester databaseTester = new JdbcDatabaseTester("org.h2.Driver", "jdbc:h2:mem:test");
-        String[] tables = {"course_category", "course",
-                "training_program_type"};
+        String[] tables = {"course_category", "course"};
         IDataSet dataSet = databaseTester.getConnection().createDataSet(tables);
         databaseTester.setDataSet(dataSet);
         databaseTester.onSetup();

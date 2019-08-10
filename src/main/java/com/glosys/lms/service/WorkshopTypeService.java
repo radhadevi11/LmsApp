@@ -6,7 +6,7 @@ import com.glosys.lms.dao.DaoFactory;
 
 import java.util.List;
 
-public class WorkshopService {
+public class WorkshopTypeService {
     public List<WorkshopType> getWorkshopTypes(){
        return DaoFactory.getWorkshopTypeDao().getWorkshopTypes();
     }

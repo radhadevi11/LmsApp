@@ -11,8 +11,6 @@ public class CorporateTraining {
     @Column(name = "corporate_training_id")
     private Integer id;
 
-    @Column(name = "training_program_type_id")
-    private Integer trainingProgramTypeId;
 
     @Column(name = "corporate_training_type_id")
     private Integer corporateTrainingTypeId;

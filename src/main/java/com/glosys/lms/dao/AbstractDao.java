@@ -27,7 +27,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
             if(entityManager.getTransaction().isActive()){
                 entityManager.getTransaction().rollback();
             }
-            e.printStackTrace();
+            throw new RuntimeException("Can not save entity",e);
         }
 
     }

@@ -60,6 +60,10 @@ public class Course {
                 inplantTrainingEligibility, corporateTrainingEligibility);
     }
 
+    public Course(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -33,8 +33,14 @@ public class WorkshopType {
     public WorkshopType() {
     }
 
-    public WorkshopType(String modeOfTraining, int noOfWorkshops, int totalDays,
-                        int totalHours, int hoursPerDay, String workshopPackage, double cost) {
+    public WorkshopType(String modeOfTraining, int noOfWorkshops, int totalDays, int totalHours,
+                    int hoursPerDay, String workshopPackage, double cost) {
+        this(null, modeOfTraining, noOfWorkshops, totalDays, totalHours, hoursPerDay, workshopPackage, cost);
+    }
+
+    public WorkshopType(Integer id, String modeOfTraining, int noOfWorkshops, int totalDays, int totalHours,
+                        int hoursPerDay, String workshopPackage, double cost) {
+        this.id = id;
         this.modeOfTraining = modeOfTraining;
         this.noOfWorkshops = noOfWorkshops;
         this.totalDays = totalDays;
@@ -42,6 +48,10 @@ public class WorkshopType {
         this.hoursPerDay = hoursPerDay;
         this.workshopPackage = workshopPackage;
         this.cost = cost;
+    }
+
+    public WorkshopType(Integer id) {
+        this.id = id;
     }
 
     public Integer getId() {
