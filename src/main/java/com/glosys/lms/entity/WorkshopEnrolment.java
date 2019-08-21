@@ -15,26 +15,22 @@ public class WorkshopEnrolment {
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "workshop_type_id")
-    private WorkshopType workshopType;
-
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
+    @JoinColumn(name = "workshop_id")
+    private Workshop workshop;
 
 
     public WorkshopEnrolment() {
     }
 
-    public WorkshopEnrolment(Student student, WorkshopType workshopType, Course course) {
-        this(null, student, workshopType, course);
+    public WorkshopEnrolment(Student student, Workshop workshop) {
+        this(null, student, workshop);
     }
 
-    public WorkshopEnrolment(Integer id, Student student, WorkshopType workshopType, Course course) {
+    public WorkshopEnrolment(Integer id, Student student, Workshop workshop) {
         this.id = id;
         this.student = student;
-        this.workshopType = workshopType;
-        this.course = course;
+        this.workshop = workshop;
+
     }
 
     public Integer getId() {
@@ -53,19 +49,13 @@ public class WorkshopEnrolment {
         this.student = student;
     }
 
-    public Course getCourse() {
-        return course;
+    public Workshop getWorkshop() {
+        return workshop;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public WorkshopType getWorkshopType() {
-        return workshopType;
-    }
-
-    public void setWorkshopType(WorkshopType workshopType) {
-        this.workshopType = workshopType;
+    public void setWorkshop(Workshop workshop) {
+        this.workshop = workshop;
     }
 }
+
+

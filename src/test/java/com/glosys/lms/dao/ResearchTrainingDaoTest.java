@@ -14,13 +14,13 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-@Ignore
-public class ResearchTrainingDaoTest {
-    protected static EntityManagerFactory emf;
+
+public class ResearchTrainingDaoTest extends AbstractDaoTest {
+
     protected static EntityManager em ;
     @BeforeClass
     public static void init() throws FileNotFoundException, SQLException {
-        emf = Persistence.createEntityManagerFactory("lms-app-test");
+
         em = emf.createEntityManager();
 
     }
@@ -43,7 +43,7 @@ public class ResearchTrainingDaoTest {
     @Test
     public void testGetResearchTrainings(){
         ResearchTrainingDao researchTrainingDao = new ResearchTrainingDao(em);
-        researchTrainingDao.save(new ResearchTraining(1));
+        researchTrainingDao.save(new ResearchTraining());
         List<ResearchTraining> actual = researchTrainingDao.getResearchTrainings();
         assertEquals(1, actual.size());
 

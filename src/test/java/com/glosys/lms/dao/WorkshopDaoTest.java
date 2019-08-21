@@ -1,21 +1,25 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.entity.*;
+import com.glosys.lms.entity.Course;
+import com.glosys.lms.entity.CourseCategory;
+import com.glosys.lms.entity.Workshop;
+import com.glosys.lms.entity.WorkshopType;
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.io.FileNotFoundException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
-
-public class WorkshopEnrolmentDaoTest extends AbstractDaoTest {
-
+public class WorkshopDaoTest extends AbstractDaoTest {
     protected static EntityManager em ;
     @BeforeClass
     public static void init() throws FileNotFoundException, SQLException {
@@ -26,7 +30,7 @@ public class WorkshopEnrolmentDaoTest extends AbstractDaoTest {
     @Before
     public  void setUp() throws Exception {
         JdbcDatabaseTester databaseTester = new JdbcDatabaseTester("org.h2.Driver", "jdbc:h2:mem:test");
-        String[] tables = {"student", "course", "workshop_type", "workshop_enrolment","workshop"};
+        String[] tables = { "course", "workshop_type","workshop"};
         IDataSet dataSet = databaseTester.getConnection().createDataSet(tables);
         databaseTester.setDataSet(dataSet);
         databaseTester.onSetup();
@@ -37,28 +41,23 @@ public class WorkshopEnrolmentDaoTest extends AbstractDaoTest {
     public void after(){
         em.clear();
     }
-    @Test
-    public void testSaveWorkshopEnrolment(){
 
-        StudentDaoImpl studentDao = new StudentDaoImpl(em);
-        Student student = new Student();
-        studentDao.save(student);
-        System.out.println("Student id is "+student.getId());
+    @Test
+    public void testSaveWorkshop(){
         CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
         CourseCategory courseCategory = new CourseCategory("some course category");
         courseCategoryDao.save(courseCategory);
         CourseDao  courseDao = new CourseDao(em);
         Course course = new Course(null, null, null, courseCategory, true, true, true, true);
         courseDao.save(course);
+        WorkshopTypeDao workshopTypeDao = new WorkshopTypeDao(em);
+        WorkshopType workshopType = new WorkshopType();
+        workshopTypeDao.save(workshopType);
+        Workshop workshop = new Workshop(workshopType, course, LocalDate.of(2019, 10, 25));
         WorkshopDao workshopDao = new WorkshopDao(em);
-        Workshop workshop = new Workshop();
         workshopDao.save(workshop);
 
-        WorkshopEnrolmentDao workshopEnrolmentDao = new WorkshopEnrolmentDao(em);
-        WorkshopEnrolment workshopEnrolment = new WorkshopEnrolment(student, workshop);
-        workshopEnrolmentDao.save(workshopEnrolment);
-
-
     }
+
 
 }

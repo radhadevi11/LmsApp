@@ -16,12 +16,10 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 
-public class CourseDaoTest {
-    protected static EntityManagerFactory emf;
+public class CourseDaoTest extends AbstractDaoTest {
     protected static EntityManager em ;
     @BeforeClass
     public static void init() throws FileNotFoundException, SQLException {
-        emf = Persistence.createEntityManagerFactory("lms-app-test");
         em = emf.createEntityManager();
 
     }

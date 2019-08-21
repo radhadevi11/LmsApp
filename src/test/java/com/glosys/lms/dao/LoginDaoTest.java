@@ -1,28 +1,61 @@
 package com.glosys.lms.dao;
 
-import org.junit.Test;
+import com.glosys.lms.entity.Student;
+import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.dataset.IDataSet;
+import org.junit.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
 import static org.junit.Assert.*;
 
-public class LoginDaoTest {
 
-    @Test
-    public void testIsvalidUser(){
-        LoginDao loginDao = new LoginDao();
-        boolean actual = loginDao.isValidUser("shalu@gmail.com","123");
-        System.out.println("Result:"+actual);
-        assertEquals(true,actual);
+public class LoginDaoTest extends AbstractDaoTest {
 
+
+    protected static EntityManager em ;
+    @BeforeClass
+    public static void init() throws FileNotFoundException, SQLException {
+        em = emf.createEntityManager();
+
+    }
+    @Before
+    public  void setUp() throws Exception {
+        JdbcDatabaseTester databaseTester = new JdbcDatabaseTester("org.h2.Driver", "jdbc:h2:mem:test");
+        String[] tables = {"student"};
+        IDataSet dataSet = databaseTester.getConnection().createDataSet(tables);
+        databaseTester.setDataSet(dataSet);
+        databaseTester.onSetup();
 
     }
 
-    @Test
-    public void testInvalidUser(){
-        LoginDao loginDao = new LoginDao();
-        boolean actual = loginDao.isValidUser("aaaaa@gmail.com","111");
-        System.out.println("Result:"+actual);
-        assertEquals(false,actual);
+    @After
+    public void after(){
+        em.clear();
     }
+
+    @Test
+    public void testGetValidUser(){
+        StudentDaoImpl studentDao = new StudentDaoImpl(em);
+        studentDao.save(new Student("Some",null,null,"test@gmail.com",null,"psw"));
+        LoginDao loginDao = new LoginDao(em);
+        Student actual = loginDao.getValidUser("test@gmail.com", "psw");
+        assertEquals("Some", actual.getFirstName());
+        assertNotNull(actual);
+    }
+
+    @Test
+    public void testGetInvalidUser(){
+        LoginDao loginDao = new LoginDao(em);
+        Student actual = loginDao.getValidUser("test@gmail.com", "psw");
+        assertNull(actual);
+    }
+
+
 
 
 }

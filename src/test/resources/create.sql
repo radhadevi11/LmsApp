@@ -5,22 +5,6 @@ create table course_category
 	name varchar(100) null
 );
 
-create table course
-(
-	course_id int auto_increment
-		primary key,
-	name varchar(50) null,
-	code varchar(20) null,
-	syllabus varchar(100) null,
-	course_category_id int null,
-	workshop_eligibility bit null,
-	research_training_eligibility bit null,
-	inplant_training_eligibility bit null,
-	corporate_training_eligibility bit null,
-	constraint course_course_category_course_category_id_fk
-		foreign key (course_category_id) references course_category (course_category_id)
-);
-
 
 create table research_training
 (
@@ -43,17 +27,35 @@ create table research_training
     `package` varchar(10) DEFAULT NULL,
     `cost` double DEFAULT NULL
   );
+create table course
+(
+	course_id int auto_increment
+		primary key,
+	name varchar(50) null,
+	code varchar(20) null,
+	syllabus varchar(100) null,
+	course_category_id int null,
+	workshop_eligibility bit null,
+	research_training_eligibility bit null,
+	inplant_training_eligibility bit null,
+	corporate_training_eligibility bit null,
+	constraint course_course_category_course_category_id_fk
+		foreign key (course_category_id) references course_category (course_category_id)
+);
 
 
-CREATE TABLE workshop (
-  workshop_id INT(50) NOT NULL,
-  workshop_type_id INT NULL,
-  PRIMARY KEY (workshop_id),
-  CONSTRAINT workshop_type_fk
-  FOREIGN KEY (workshop_type_id)
-  REFERENCES workshop_type (workshop_type_id)
-  ON DELETE NO ACTION
-  ON UPDATE NO ACTION);
+CREATE TABLE `workshop` (
+  `workshop_id` int(50) NOT NULL AUTO_INCREMENT,
+  `workshop_type_id` int(11) DEFAULT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  `workshop_date` date DEFAULT NULL,
+  PRIMARY KEY (`workshop_id`),
+  CONSTRAINT `course_id_fk`
+   FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`)
+);
+
+
+
 
 create table student(
 student_id int not null primary key AUTO_INCREMENT,
@@ -67,11 +69,12 @@ passwordd varchar(50));
 CREATE TABLE `workshop_enrolment` (
   `workshop_enrolment_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) DEFAULT NULL,
-  `workshop_type_id` int(11) DEFAULT NULL,
-  `course_id` int(11) DEFAULT NULL,
+  `workshop_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`workshop_enrolment_id`),
-  CONSTRAINT `course_id_fk` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
-  CONSTRAINT `student_id_fk` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
-  CONSTRAINT `workshop_type_id_fk` FOREIGN KEY (`workshop_type_id`) REFERENCES `workshop_type` (`workshop_type_id`)
+  CONSTRAINT `student_id_fk`
+  FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
+  CONSTRAINT `workshop_id_fk`
+  FOREIGN KEY (`workshop_id`) REFERENCES `workshop` (`workshop_id`)
 );
+
 

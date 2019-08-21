@@ -12,6 +12,7 @@
         <class>com.glosys.lms.entity.Student</class>
         <class>com.glosys.lms.entity.WorkshopType</class>
         <class>com.glosys.lms.entity.WorkshopEnrolment</class>
+        <class>com.glosys.lms.entity.Workshop</class>
 
         <properties>
             <!-- Configuring JDBC properties -->
