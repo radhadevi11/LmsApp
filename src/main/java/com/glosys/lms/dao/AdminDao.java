@@ -7,7 +7,6 @@ import javax.persistence.Query;
 public class AdminDao extends AbstractDao<Admin> {
 
     public boolean isValidAdmin(String name, String password) {
-        long count = 0;
 
 
         try {
@@ -16,24 +15,24 @@ public class AdminDao extends AbstractDao<Admin> {
                     " and admin.password=:password");
             query.setParameter("name", name);
             query.setParameter("password", password);
-            count = (long) query.getSingleResult();
+            long count = (long) query.getSingleResult();
             entityManager.getTransaction().commit();
+            if(count == 1){
+                return true;
+            }
+            else {
+                return false;
+            }
 
         }
         catch (Exception e){
             if(entityManager.getTransaction().isActive()){
                 entityManager.getTransaction().rollback();
             }
-            e.printStackTrace();
+           throw new RuntimeException("can not get valid admin",e);
         }
 
 
-        if(count == 1){
-            return true;
-        }
-        else {
-            return false;
-        }
 
     }
 
