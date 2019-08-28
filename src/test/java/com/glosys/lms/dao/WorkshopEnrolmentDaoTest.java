@@ -77,13 +77,13 @@ public class WorkshopEnrolmentDaoTest extends AbstractDaoTest {
         Course course = new Course(null, null, null, courseCategory, true, true, true, true);
         courseDao.save(course);
         WorkshopDao workshopDao = new WorkshopDao(em);
-        Workshop workshop = new Workshop();
+        Workshop workshop = new Workshop(null,course, LocalDate.of(2020, Month.OCTOBER, 25));
         workshopDao.save(workshop);
 
         WorkshopEnrolmentDao workshopEnrolmentDao = new WorkshopEnrolmentDao(em);
         WorkshopEnrolment workshopEnrolment = new WorkshopEnrolment(student, workshop);
         workshopEnrolmentDao.save(workshopEnrolment);
-        List<WorkshopEnrolment> actual = workshopEnrolmentDao.getAvailableWorkshopForStudent(1);
+        List<Workshop> actual = workshopEnrolmentDao.getAvailableWorkshopForStudent(1);
         assertEquals(0, actual.size());
 
     }
@@ -112,7 +112,7 @@ public class WorkshopEnrolmentDaoTest extends AbstractDaoTest {
         workshopEnrolmentDao.save(workshopEnrolment);
         workshopEnrolmentDao.save(workshopEnrolment2);
 
-        List<WorkshopEnrolment> actual = workshopEnrolmentDao.getAvailableWorkshopForStudent(2);
+        List<Workshop> actual = workshopEnrolmentDao.getAvailableWorkshopForStudent(2);
         assertEquals(2, actual.size());
 
     }

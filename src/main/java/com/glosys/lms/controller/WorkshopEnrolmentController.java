@@ -12,9 +12,9 @@ public class WorkshopEnrolmentController {
         workshopEnrolmentService.saveWorkshopEnrolment(workshopEnrolment);
     }
 
-    public List<WorkshopEnrolment> getAvailableWorkshopsForStudent(int studentId){
+   /* public List<WorkshopEnrolment> getAvailableWorkshopsForStudent(int studentId){
         return workshopEnrolmentService.getAvailableWorkshopsForStudent(studentId);
-    }
+    }*/
 
     public List<WorkshopEnrolment> getEnrolmentsByStudentId(int studentId ){
         return workshopEnrolmentService.getEnrolmentsByStudentId(studentId);

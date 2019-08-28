@@ -58,5 +58,4 @@ public class WorkshopDao extends AbstractDao<Workshop> {
 
         }
 
-
 }

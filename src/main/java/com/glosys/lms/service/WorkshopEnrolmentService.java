@@ -11,9 +11,9 @@ public class WorkshopEnrolmentService {
 
     }
 
-    public List<WorkshopEnrolment> getAvailableWorkshopsForStudent(int studentId){
+   /* public List<WorkshopEnrolment> getAvailableWorkshopsForStudent(int studentId){
         return DaoFactory.getWorkshopEnrolmentDao().getAvailableWorkshopForStudent(studentId);
-    }
+    }*/
 
     public List<WorkshopEnrolment> getEnrolmentsByStudentId(int studentId){
         return DaoFactory.getWorkshopEnrolmentDao().getEnrolmentsByStudentId(studentId);

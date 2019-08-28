@@ -1,8 +1,10 @@
 package com.glosys.lms.dao;
 
+import com.glosys.lms.entity.Workshop;
 import com.glosys.lms.entity.WorkshopEnrolment;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -13,20 +15,23 @@ public class WorkshopEnrolmentDao extends AbstractDao<WorkshopEnrolment> {
         super(entityManager);
     }
 
-    public List<WorkshopEnrolment> getAvailableWorkshopForStudent(int studentId){
-        try{
+    public List<Workshop> getAvailableWorkshopForStudent(int studentId){
+        try {
             entityManager.getTransaction().begin();
-            TypedQuery<WorkshopEnrolment> query = (TypedQuery<WorkshopEnrolment>) entityManager.createQuery("SELECT " +
-                    "wE from WorkshopEnrolment wE WHERE wE.workshop.date > CURRENT_DATE AND wE.student.id<>:studentId");
-            query.setParameter("studentId",studentId);
+            Query query = entityManager.createQuery("SELECT w FROM Workshop w WHERE " +
+                    "NOT EXISTS (SELECT wE.workshop.id FROM WorkshopEnrolment wE " +
+                    "WHERE wE.workshop.id=w.id AND wE.student.id=:studentId OR wE.workshop.date < CURRENT_DATE");
+            query.setParameter("studentId", studentId);
+            List<Workshop> workshops = query.getResultList();
             entityManager.getTransaction().commit();
-            return query.getResultList();
+            return workshops;
         }catch (Exception e){
             if(entityManager.getTransaction().isActive()){
                 entityManager.getTransaction().rollback();
             }
-            throw new RuntimeException("can not get available workshops for students ",e);
+            throw new RuntimeException("Can not get future workshops");
         }
+
     }
 
     public List<WorkshopEnrolment> getEnrolmentsByStudentId(int studentId){
