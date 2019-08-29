@@ -15,7 +15,7 @@ public class WorkshopService {
         return DaoFactory.getWorkshopDao().isExistingWorkshop(workshopTypeId, courseId, date);
     }
 
-    public List<Workshop> getFutureWorkshops(){
-        return DaoFactory.getWorkshopDao().getFutureWorkshops();
+    public List<Workshop> getAvailableAndFutureWorkshopsByStudentId(int studentId){
+        return DaoFactory.getWorkshopDao().getAvailableAndFutureWorkshopsByStudentId(studentId);
     }
 }

@@ -63,60 +63,7 @@ public class WorkshopEnrolmentDaoTest extends AbstractDaoTest {
 
 
     }
-
-    @Test
-    public void testGetAvailableWorkshopForEnrolledStudent(){
-        StudentDaoImpl studentDao = new StudentDaoImpl(em);
-        Student student = new Student();
-        studentDao.save(student);
-        System.out.println("Student id is "+student.getId());
-        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
-        CourseCategory courseCategory = new CourseCategory("some course category");
-        courseCategoryDao.save(courseCategory);
-        CourseDao  courseDao = new CourseDao(em);
-        Course course = new Course(null, null, null, courseCategory, true, true, true, true);
-        courseDao.save(course);
-        WorkshopDao workshopDao = new WorkshopDao(em);
-        Workshop workshop = new Workshop(null,course, LocalDate.of(2020, Month.OCTOBER, 25));
-        workshopDao.save(workshop);
-
-        WorkshopEnrolmentDao workshopEnrolmentDao = new WorkshopEnrolmentDao(em);
-        WorkshopEnrolment workshopEnrolment = new WorkshopEnrolment(student, workshop);
-        workshopEnrolmentDao.save(workshopEnrolment);
-        List<Workshop> actual = workshopEnrolmentDao.getAvailableWorkshopForStudent(1);
-        assertEquals(0, actual.size());
-
-    }
     @Ignore
-    @Test
-    public void testGetAvailableWorkshopForNotEnrolledStudent(){
-        StudentDaoImpl studentDao = new StudentDaoImpl(em);
-        Student student = new Student();
-        studentDao.save(student);
-        System.out.println("Student id is "+student.getId());
-        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
-        CourseCategory courseCategory = new CourseCategory("some course category");
-        courseCategoryDao.save(courseCategory);
-        CourseDao  courseDao = new CourseDao(em);
-        Course course = new Course(null, null, null, courseCategory, true, true, true, true);
-        courseDao.save(course);
-        WorkshopDao workshopDao = new WorkshopDao(em);
-        Workshop workshop = new Workshop(null,course, LocalDate.of(2020, Month.OCTOBER, 25));
-        workshopDao.save(workshop);
-        Workshop workshop1 = new Workshop();
-        workshopDao.save(workshop1);
-
-        WorkshopEnrolmentDao workshopEnrolmentDao = new WorkshopEnrolmentDao(em);
-        WorkshopEnrolment workshopEnrolment = new WorkshopEnrolment(student, workshop1);
-        WorkshopEnrolment workshopEnrolment2 = new WorkshopEnrolment(student, workshop1);
-        workshopEnrolmentDao.save(workshopEnrolment);
-        workshopEnrolmentDao.save(workshopEnrolment2);
-
-        List<Workshop> actual = workshopEnrolmentDao.getAvailableWorkshopForStudent(2);
-        assertEquals(2, actual.size());
-
-    }
-
     @Test
     public void testGetEnrolmentsByStudentId(){
         StudentDaoImpl studentDao = new StudentDaoImpl(em);
@@ -148,8 +95,6 @@ public class WorkshopEnrolmentDaoTest extends AbstractDaoTest {
         List<WorkshopEnrolment> actual = workshopEnrolmentDao.getEnrolmentsByStudentId(1);
         assertEquals(1,actual.size() );
 
-        List<WorkshopEnrolment> actual2 = workshopEnrolmentDao.getEnrolmentsByStudentId(2);
-        assertEquals(1,actual2.size() );
 
     }
 

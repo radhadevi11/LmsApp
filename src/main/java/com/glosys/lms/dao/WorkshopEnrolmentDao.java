@@ -15,24 +15,7 @@ public class WorkshopEnrolmentDao extends AbstractDao<WorkshopEnrolment> {
         super(entityManager);
     }
 
-    public List<Workshop> getAvailableWorkshopForStudent(int studentId){
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("SELECT w FROM Workshop w WHERE " +
-                    "NOT EXISTS (SELECT wE.workshop.id FROM WorkshopEnrolment wE " +
-                    "WHERE wE.workshop.id=w.id AND wE.student.id=:studentId OR wE.workshop.date < CURRENT_DATE");
-            query.setParameter("studentId", studentId);
-            List<Workshop> workshops = query.getResultList();
-            entityManager.getTransaction().commit();
-            return workshops;
-        }catch (Exception e){
-            if(entityManager.getTransaction().isActive()){
-                entityManager.getTransaction().rollback();
-            }
-            throw new RuntimeException("Can not get future workshops");
-        }
 
-    }
 
     public List<WorkshopEnrolment> getEnrolmentsByStudentId(int studentId){
         try{

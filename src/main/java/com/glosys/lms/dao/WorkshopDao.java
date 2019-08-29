@@ -41,11 +41,13 @@ public class WorkshopDao extends AbstractDao<Workshop> {
 
         }
 
-        public List<Workshop> getFutureWorkshops(){
+        public List<Workshop> getAvailableAndFutureWorkshopsByStudentId(int studentId){
             try {
                 entityManager.getTransaction().begin();
-                TypedQuery<Workshop> query = (TypedQuery<Workshop>) entityManager.createQuery("SELECT w FROM Workshop w " +
-                        "where w.date > CURRENT_DATE");
+                Query query = entityManager.createQuery("SELECT w FROM Workshop w WHERE w.date > CURRENT_DATE AND " +
+                        "NOT EXISTS (SELECT wE.workshop.id FROM WorkshopEnrolment wE " +
+                        "WHERE wE.workshop.id=w.id AND wE.student.id=:studentId)");
+                query.setParameter("studentId", studentId);
                 List<Workshop> workshops = query.getResultList();
                 entityManager.getTransaction().commit();
                 return workshops;

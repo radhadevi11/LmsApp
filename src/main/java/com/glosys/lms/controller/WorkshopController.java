@@ -17,7 +17,7 @@ public class WorkshopController {
         return workshopService.isExistingWorkshop(workshopTypeId, courseId, date);
     }
 
-    public List<Workshop> getFutureWorkshops(){
-        return workshopService.getFutureWorkshops();
+    public List<Workshop> getAvailableAndFutureWorkshopsByStudentId(int studentId){
+        return workshopService.getAvailableAndFutureWorkshopsByStudentId(studentId);
     }
 }
