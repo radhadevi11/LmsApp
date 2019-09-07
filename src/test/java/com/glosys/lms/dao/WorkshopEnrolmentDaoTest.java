@@ -63,37 +63,38 @@ public class WorkshopEnrolmentDaoTest extends AbstractDaoTest {
 
 
     }
-    @Ignore
+
     @Test
     public void testGetEnrolmentsByStudentId(){
         StudentDaoImpl studentDao = new StudentDaoImpl(em);
         Student student = new Student();
-        studentDao.save(student);
+        student.setFirstName("radha");
 
-        Student student2 = new Student();
-        studentDao.save(student2);
+        Student savedStudent = studentDao.save(student);
 
-        System.out.println("Student id is "+student.getId());
+
+        System.out.println("Student id is "+savedStudent.getId());
         CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
         CourseCategory courseCategory = new CourseCategory("some course category");
-        courseCategoryDao.save(courseCategory);
+        CourseCategory savedCourseCategory = courseCategoryDao.save(courseCategory);
         CourseDao  courseDao = new CourseDao(em);
-        Course course = new Course(null, null, null, courseCategory, true, true, true, true);
-        courseDao.save(course);
+        Course course = new Course("some course", null, null, new CourseCategory(savedCourseCategory.getId()), true, true, true, true);
+        Course savedCourse = courseDao.save(course);
         WorkshopDao workshopDao = new WorkshopDao(em);
-        Workshop workshop = new Workshop(null,course, LocalDate.of(2020, Month.OCTOBER, 25));
-        workshopDao.save(workshop);
-        Workshop workshop1 = new Workshop();
-        workshopDao.save(workshop1);
+        LocalDate date = LocalDate.of(2020, Month.OCTOBER, 25);
+        Workshop workshop = new Workshop(null,new Course(savedCourse.getId()), date);
+        Workshop savedWorkshop = workshopDao.save(workshop);
+
 
         WorkshopEnrolmentDao workshopEnrolmentDao = new WorkshopEnrolmentDao(em);
-        WorkshopEnrolment workshopEnrolment = new WorkshopEnrolment(student, workshop1);
-        WorkshopEnrolment workshopEnrolment2 = new WorkshopEnrolment(student2, workshop1);
-        workshopEnrolmentDao.save(workshopEnrolment);
-        workshopEnrolmentDao.save(workshopEnrolment2);
+        WorkshopEnrolment workshopEnrolment = new WorkshopEnrolment(new Student(savedStudent.getId())
+                ,new Workshop(savedWorkshop.getId()));
 
-        List<WorkshopEnrolment> actual = workshopEnrolmentDao.getEnrolmentsByStudentId(1);
+        WorkshopEnrolment savedEnrolment = workshopEnrolmentDao.save(workshopEnrolment);
+
+        List<WorkshopEnrolment> actual = workshopEnrolmentDao.getEnrolmentsByStudentId(savedStudent.getId());
         assertEquals(1,actual.size() );
+        assertEquals(date, actual.get(0).getWorkshop().getDate());
 
 
     }

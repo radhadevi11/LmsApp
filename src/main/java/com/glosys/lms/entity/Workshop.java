@@ -18,8 +18,8 @@ public class Workshop {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
-    
-   @Column(name="workshop_date")
+
+    @Column(name="workshop_date")
     private LocalDate date;
 
 
@@ -72,5 +72,15 @@ public class Workshop {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Workshop{" +
+                "id=" + id +
+                ", workshopType=" + workshopType +
+                ", course=" + course +
+                ", date=" + date +
+                '}';
     }
 }

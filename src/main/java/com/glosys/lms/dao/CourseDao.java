@@ -57,27 +57,6 @@ public class CourseDao extends AbstractDao<Course> {
             Course updatedCourse =  entityManager.merge(course);
             entityManager.getTransaction().commit();
             return  updatedCourse;
-
-            /*Query query = entityManager.createQuery("UPDATE Course c SET c.name=:courseName, c.code=:courseCode, " +
-                    "c.syllabus=:syllabus,c.courseCategory=:courseCategory,c.workshopEligibility=:workshopEligibility," +
-                    "c.researchTrainingEligibility=:researchTrainingEligibility," +
-                    "c.inplantTrainingEligibility=:inplantTrainingEligibility," +
-                    " c.corporateTrainingEligibility=:corporateTrainingEligibility where c.id=:courseId");
-
-            query.setParameter("courseName", course.getName());
-            query.setParameter("courseCode", course.getCode());
-            query.setParameter("syllabus",course.getSyllabus());
-            query.setParameter("courseCategory",course.getCourseCategory());
-            query.setParameter("workshopEligibility",course.isWorkshopEligibility());
-            query.setParameter("researchTrainingEligibility", course.isResearchTrainingEligibility());
-            query.setParameter("inplantTrainingEligibility", course.isResearchTrainingEligibility());
-            query.setParameter("corporateTrainingEligibility", course.isCorporateTrainingEligibility());
-            query.setParameter("courseId",courseId);
-
-            int updateCount = query.executeUpdate();*/
-
-
-
         } catch (Exception e) {
             if(entityManager.getTransaction().isActive()){
                 entityManager.getTransaction().rollback();
@@ -85,6 +64,8 @@ public class CourseDao extends AbstractDao<Course> {
             throw new RuntimeException("can not update courses for workshop",e);
         }
     }
+
+
 
 
     public List<Course> getCoursesForWorkshop() {

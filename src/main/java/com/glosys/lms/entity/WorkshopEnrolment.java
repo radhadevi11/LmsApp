@@ -14,7 +14,8 @@ public class WorkshopEnrolment {
     @JoinColumn(name = "student_id")
     private Student student;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "workshop_id")
     private Workshop workshop;
 
@@ -55,6 +56,15 @@ public class WorkshopEnrolment {
 
     public void setWorkshop(Workshop workshop) {
         this.workshop = workshop;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkshopEnrolment{" +
+                "id=" + id +
+                ", student=" + student +
+                ", workshop=" + workshop +
+                '}';
     }
 }
 

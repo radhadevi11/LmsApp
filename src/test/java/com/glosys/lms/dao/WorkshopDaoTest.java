@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-@Ignore
+
 public class WorkshopDaoTest extends AbstractDaoTest {
     protected static EntityManager em ;
     @BeforeClass
@@ -41,54 +41,40 @@ public class WorkshopDaoTest extends AbstractDaoTest {
 
     @Test
     public void testSaveWorkshop(){
-        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
-        CourseCategory courseCategory = new CourseCategory("some course category");
-        courseCategoryDao.save(courseCategory);
-        CourseDao  courseDao = new CourseDao(em);
-        Course course = new Course(null, null, null, courseCategory, true, true, true, true);
-        courseDao.save(course);
-        WorkshopTypeDao workshopTypeDao = new WorkshopTypeDao(em);
-        WorkshopType workshopType = new WorkshopType();
-        workshopTypeDao.save(workshopType);
-        Workshop workshop = new Workshop(workshopType, course, LocalDate.of(2019, 10, 25));
+
+        Course course1 = new CourseHelper().save(em);
+        WorkshopType workshopType1 = new WorkshopTypeHelper().save(em);
+
+        Workshop workshop = new Workshop(workshopType1, course1, LocalDate.of(2019, 10, 25));
         WorkshopDao workshopDao = new WorkshopDao(em);
         workshopDao.save(workshop);
+
 
     }
     @Test
     public void testNotExistingWorkshop(){
-        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
-        CourseCategory courseCategory = new CourseCategory("some course category");
-        courseCategoryDao.save(courseCategory);
-        CourseDao  courseDao = new CourseDao(em);
-        Course course = new Course(null, null, null, courseCategory, true, true, true, true);
-        courseDao.save(course);
-        WorkshopTypeDao workshopTypeDao = new WorkshopTypeDao(em);
-        WorkshopType workshopType = new WorkshopType();
-        workshopTypeDao.save(workshopType);
-        Workshop workshop = new Workshop(workshopType, course, LocalDate.of(2019,Month.OCTOBER, 25));
+
         WorkshopDao workshopDao = new WorkshopDao(em);
-        workshopDao.save(workshop);
-        boolean actual = workshopDao.isExistingWorkshop(2, 2, LocalDate.of(2020, Month.MAY, 25));
+
+        Workshop workshop1 = new WorkshopHelper().save(em, LocalDate.of(2019, Month.OCTOBER, 25));
+        boolean actual = workshopDao.isExistingWorkshop(workshop1.getWorkshopType().getId(),
+               workshop1.getCourse().getId(),
+                LocalDate.of(2020, Month.MAY, 25));
+
         assertEquals(false, actual);
 
     }
-    @Ignore
     @Test
     public void testExistingWorkshop(){
-        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
-        CourseCategory courseCategory = new CourseCategory("some course category");
-        courseCategoryDao.save(courseCategory);
-        CourseDao  courseDao = new CourseDao(em);
-        Course course = new Course(null, null, null, courseCategory, true, true, true, true);
-        courseDao.save(course);
-        WorkshopTypeDao workshopTypeDao = new WorkshopTypeDao(em);
-        WorkshopType workshopType = new WorkshopType();
-        workshopTypeDao.save(workshopType);
-        Workshop workshop = new Workshop(workshopType, course, LocalDate.of(2019, Month.OCTOBER, 25));
+
+
         WorkshopDao workshopDao = new WorkshopDao(em);
-        workshopDao.save(workshop);
-        boolean actual = workshopDao.isExistingWorkshop(1, 1, LocalDate.of(2019, Month.OCTOBER, 25));
+
+        Workshop workshop1 = new WorkshopHelper().save(em, LocalDate.of(2020, Month.MAY, 25));
+        boolean actual = workshopDao.isExistingWorkshop(workshop1.getWorkshopType().getId(),
+                workshop1.getCourse().getId(),
+                LocalDate.of(2020, Month.MAY, 25));
+
         assertEquals(true, actual);
 
     }
@@ -96,57 +82,33 @@ public class WorkshopDaoTest extends AbstractDaoTest {
     @Test
     public void testGetAvailableWorkshopForEnrolledStudent(){
         StudentDaoImpl studentDao = new StudentDaoImpl(em);
-        Student student = new Student();
-        studentDao.save(student);
-        System.out.println("Student id is "+student.getId());
-        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
-        CourseCategory courseCategory = new CourseCategory("some course category");
-        courseCategoryDao.save(courseCategory);
-        CourseDao  courseDao = new CourseDao(em);
-        Course course = new Course(null, null, null, courseCategory, true, true, true, true);
-        courseDao.save(course);
+        Student savedStudent = studentDao.save(new Student());
+
         WorkshopDao workshopDao = new WorkshopDao(em);
-        Workshop workshop = new Workshop(null,course, LocalDate.of(2020, Month.OCTOBER, 25));
-        workshopDao.save(workshop);
+
+
+        Workshop workshop = new WorkshopHelper().save(em, LocalDate.of(2020, Month.OCTOBER, 25));
 
         WorkshopEnrolmentDao workshopEnrolmentDao = new WorkshopEnrolmentDao(em);
-        WorkshopEnrolment workshopEnrolment = new WorkshopEnrolment(student, workshop);
+        WorkshopEnrolment workshopEnrolment = new WorkshopEnrolment(savedStudent, workshop);
         workshopEnrolmentDao.save(workshopEnrolment);
-        List<Workshop> actual = workshopDao.getAvailableAndFutureWorkshopsByStudentId(1);
+        List<Workshop> actual = workshopDao.getAvailableAndFutureWorkshopsByStudentId(savedStudent.getId());
         assertEquals(0, actual.size());
 
     }
 
     @Test
-    public void testGetAvailableWorkshopForNotEnrolledStudent(){
-        StudentDaoImpl studentDao = new StudentDaoImpl(em);
-        Student student = new Student();
-        studentDao.save(student);
-        System.out.println("id of 1st student "+student.getId());
-        Student student2 = new Student();
-        studentDao.save(student2);
-        System.out.println("id of second student "+student2.getId());
-        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
-        CourseCategory courseCategory = new CourseCategory("some course category");
-        courseCategoryDao.save(courseCategory);
-        CourseDao  courseDao = new CourseDao(em);
-        Course course = new Course(null, null, null, courseCategory, true, true, true, true);
-        courseDao.save(course);
+    public void testGetAvailableWorkshopReturnsOnlyFutureWorkshops(){
+        Student student = new StudentHelper().save(em);
         WorkshopDao workshopDao = new WorkshopDao(em);
-        Workshop workshop = new Workshop(null,course, LocalDate.of(2019, Month.OCTOBER, 01));
-        workshopDao.save(workshop);
-        System.out.println("id of first workshop "+workshop.getId());
-        Workshop workshop2 = new Workshop(null,course, LocalDate.of(2019, Month.JUNE, 10));
-        workshopDao.save(workshop2);
-        System.out.println("id of second workshop "+workshop2.getId());
+        LocalDate currentDate = LocalDate.now();
+        Workshop futureWorkshop = new WorkshopHelper().save(em, currentDate.plusDays(5));
+        Workshop pastWorkshop =  new WorkshopHelper().save(em, currentDate.minusDays(5));
 
-        WorkshopEnrolmentDao workshopEnrolmentDao = new WorkshopEnrolmentDao(em);
-        WorkshopEnrolment workshopEnrolment = new WorkshopEnrolment(student2, workshop2);
-        workshopEnrolmentDao.save(workshopEnrolment);
+        List<Workshop> actual = workshopDao.getAvailableAndFutureWorkshopsByStudentId(student.getId());
 
-
-        List<Workshop> actual = workshopDao.getAvailableAndFutureWorkshopsByStudentId(3);
         assertEquals(1, actual.size());
+        assertEquals(futureWorkshop.getId(), actual.get(0).getId());
 
     }
 

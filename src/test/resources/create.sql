@@ -43,6 +43,16 @@ create table course
 		foreign key (course_category_id) references course_category (course_category_id)
 );
 
+CREATE TABLE `payment` (
+  `payment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `card_holder_name` varchar(45) DEFAULT NULL,
+  `card_type` varchar(45) DEFAULT NULL,
+  `card_number` varchar(45) DEFAULT NULL,
+  `cvv` varchar(45) DEFAULT NULL,
+  `exp_date` date DEFAULT NULL,
+  PRIMARY KEY (`payment_id`)
+);
+
 
 CREATE TABLE `workshop` (
   `workshop_id` int(50) NOT NULL AUTO_INCREMENT,

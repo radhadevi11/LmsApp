@@ -21,7 +21,7 @@ public class WorkshopEnrolmentDao extends AbstractDao<WorkshopEnrolment> {
         try{
             entityManager.getTransaction().begin();
             TypedQuery<WorkshopEnrolment> query = (TypedQuery<WorkshopEnrolment>) entityManager.createQuery("SELECT " +
-                    "wE from WorkshopEnrolment wE WHERE wE.student.id=:studentId");
+                    "wE from WorkshopEnrolment wE  WHERE wE.student.id=:studentId");
             query.setParameter("studentId",studentId);
             entityManager.getTransaction().commit();
             return query.getResultList();

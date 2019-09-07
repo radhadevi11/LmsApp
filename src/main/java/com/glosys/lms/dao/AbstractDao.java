@@ -1,8 +1,6 @@
 package com.glosys.lms.dao;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public abstract class AbstractDao<T> implements Dao<T> {
     protected EntityManager entityManager;
@@ -16,12 +14,14 @@ public abstract class AbstractDao<T> implements Dao<T> {
     }
 
     @Override
-    public void save(T t){
+    public T save(T t){
 
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(t);
+            T mergedEntity = entityManager.merge(t);
+            //entityManager.detach(t);
             entityManager.getTransaction().commit();
+            return mergedEntity;
         }
         catch (Exception e){
             if(entityManager.getTransaction().isActive()){
