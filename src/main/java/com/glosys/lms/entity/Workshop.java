@@ -22,20 +22,25 @@ public class Workshop {
     @Column(name="workshop_date")
     private LocalDate date;
 
+    @OneToOne
+    @JoinColumn(name = "trainer_id")
+    private Trainer trainer;
+
 
     public Workshop() {
     }
 
 
-    public Workshop(WorkshopType workshopType, Course course, LocalDate date) {
-        this(null, workshopType, course, date);
+    public Workshop(WorkshopType workshopType, Course course, LocalDate date, Trainer trainer) {
+        this(null, workshopType, course, date, trainer);
     }
 
-    public Workshop(Integer id, WorkshopType workshopType, Course course, LocalDate date) {
+    public Workshop(Integer id, WorkshopType workshopType, Course course, LocalDate date, Trainer trainer) {
         this.id = id;
         this.workshopType = workshopType;
         this.course = course;
         this.date = date;
+        this.trainer = trainer;
     }
 
     public Workshop(Integer id) {
@@ -82,5 +87,13 @@ public class Workshop {
                 ", course=" + course +
                 ", date=" + date +
                 '}';
+    }
+
+    public Trainer getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(Trainer trainer) {
+        this.trainer = trainer;
     }
 }

@@ -54,16 +54,33 @@ CREATE TABLE `payment` (
 );
 
 
+CREATE TABLE `trainer` (
+  `trainer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `gender` varchar(45) DEFAULT NULL,
+  `known_courses` varchar(100) DEFAULT NULL,
+  `user_name` varchar(45) DEFAULT NULL,
+  `passwordd` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`trainer_id`),
+  UNIQUE KEY `user_name_UNIQUE` (`user_name`)
+) ;
+
+
+
+
 CREATE TABLE `workshop` (
   `workshop_id` int(50) NOT NULL AUTO_INCREMENT,
   `workshop_type_id` int(11) DEFAULT NULL,
   `course_id` int(11) DEFAULT NULL,
   `workshop_date` date DEFAULT NULL,
+  `trainer_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`workshop_id`),
   CONSTRAINT `course_id_fk`
-   FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`)
+  FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
+  CONSTRAINT `trainer_id_fk`
+  FOREIGN KEY (`trainer_id`) REFERENCES `trainer` (`trainer_id`)
 );
-
 
 
 

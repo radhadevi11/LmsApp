@@ -6,8 +6,6 @@ import org.dbunit.dataset.IDataSet;
 import org.junit.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -43,56 +41,28 @@ public class WorkshopEnrolmentDaoTest extends AbstractDaoTest {
     @Test
     public void testSaveWorkshopEnrolment(){
 
-        StudentDaoImpl studentDao = new StudentDaoImpl(em);
-        Student student = new Student();
-        studentDao.save(student);
-        System.out.println("Student id is "+student.getId());
-        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
-        CourseCategory courseCategory = new CourseCategory("some course category");
-        courseCategoryDao.save(courseCategory);
-        CourseDao  courseDao = new CourseDao(em);
-        Course course = new Course(null, null, null, courseCategory, true, true, true, true);
-        courseDao.save(course);
+        Student savedStudent = new StudentHelper().save(em);
+
         WorkshopDao workshopDao = new WorkshopDao(em);
         Workshop workshop = new Workshop();
-        workshopDao.save(workshop);
+        Workshop savedWorkshop = workshopDao.save(workshop);
 
         WorkshopEnrolmentDao workshopEnrolmentDao = new WorkshopEnrolmentDao(em);
-        WorkshopEnrolment workshopEnrolment = new WorkshopEnrolment(student, workshop);
-        workshopEnrolmentDao.save(workshopEnrolment);
+        WorkshopEnrolment workshopEnrolment = new WorkshopEnrolment(savedStudent, savedWorkshop);
+        WorkshopEnrolment savedEnrolment = workshopEnrolmentDao.save(workshopEnrolment);
+        assertEquals(savedStudent, savedEnrolment.getStudent());
 
 
     }
 
     @Test
     public void testGetEnrolmentsByStudentId(){
-        StudentDaoImpl studentDao = new StudentDaoImpl(em);
-        Student student = new Student();
-        student.setFirstName("radha");
-
-        Student savedStudent = studentDao.save(student);
-
-
-        System.out.println("Student id is "+savedStudent.getId());
-        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
-        CourseCategory courseCategory = new CourseCategory("some course category");
-        CourseCategory savedCourseCategory = courseCategoryDao.save(courseCategory);
-        CourseDao  courseDao = new CourseDao(em);
-        Course course = new Course("some course", null, null, new CourseCategory(savedCourseCategory.getId()), true, true, true, true);
-        Course savedCourse = courseDao.save(course);
-        WorkshopDao workshopDao = new WorkshopDao(em);
         LocalDate date = LocalDate.of(2020, Month.OCTOBER, 25);
-        Workshop workshop = new Workshop(null,new Course(savedCourse.getId()), date);
-        Workshop savedWorkshop = workshopDao.save(workshop);
-
-
         WorkshopEnrolmentDao workshopEnrolmentDao = new WorkshopEnrolmentDao(em);
-        WorkshopEnrolment workshopEnrolment = new WorkshopEnrolment(new Student(savedStudent.getId())
-                ,new Workshop(savedWorkshop.getId()));
 
-        WorkshopEnrolment savedEnrolment = workshopEnrolmentDao.save(workshopEnrolment);
+        WorkshopEnrolment savedEnrolment = new WorkshopEnrolmentHelper().save(em,date);
 
-        List<WorkshopEnrolment> actual = workshopEnrolmentDao.getEnrolmentsByStudentId(savedStudent.getId());
+        List<WorkshopEnrolment> actual = workshopEnrolmentDao.getEnrolmentsByStudentId(savedEnrolment.getStudent().getId());
         assertEquals(1,actual.size() );
         assertEquals(date, actual.get(0).getWorkshop().getDate());
 

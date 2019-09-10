@@ -45,6 +45,7 @@ public class CourseDaoTest extends AbstractDaoTest {
             CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
         CourseCategory courseCategory = new CourseCategory("some course category");
         courseCategory = courseCategoryDao.save(courseCategory);
+        courseCategory.setName("new course category");
         Course course = new Course("some course",
                 "15sfgh",
                 "some syllabus",
@@ -56,10 +57,26 @@ public class CourseDaoTest extends AbstractDaoTest {
         course = courseDao.save(course);
         boolean actual = courseDao.isExistingCourse("15sfgh");
         assertEquals(true, actual);
+        assertEquals("new course category", course.getCourseCategory().getName());
 
 
     }
 
+    @Test
+    public void testSaveWithCourseCategory(){
+        CourseDao courseDao = new CourseDao(em);
+
+        Course course = new Course("some course",
+                "15sfgh",
+                "some syllabus",
+                new CourseCategory("some course category"),
+                true,
+                false,
+                true,
+                false);
+        course = courseDao.save(course);
+        assertEquals("some course category", course.getCourseCategory().getName());
+    }
 
     @Test
 

@@ -20,7 +20,7 @@ public class Course {
     @Column(name = "syllabus")
     private String syllabus;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "course_category_id",
             nullable=false, updatable=false)
     private CourseCategory courseCategory;
