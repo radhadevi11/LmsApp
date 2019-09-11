@@ -31,8 +31,12 @@ public class Trainer {
     public Trainer() {
     }
 
+    public Trainer(Integer id) {
+        this.id = id;
+    }
+
     public Trainer(String firstName, String lastName, String gender, String knownCourses,
-               String userName, String password) {
+                   String userName, String password) {
         this(null, firstName, lastName, gender, knownCourses, userName, password);
     }
 

@@ -32,5 +32,22 @@ public class TrainerDao extends AbstractDao<Trainer> {
             }
             throw new RuntimeException("Can not get Available Trainer ", e);
         }
+
+    }
+
+    public List<Trainer> getAllTrainers(){
+        try {
+            entityManager.getTransaction().begin();
+            TypedQuery<Trainer> query = entityManager.createQuery("SELECT t FROM Trainer t",
+                    Trainer.class);
+            entityManager.getTransaction().commit();
+            return query.getResultList();
+        }
+        catch (Exception e){
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
+            throw new RuntimeException("can not get all Trainers",e);
+        }
     }
 }

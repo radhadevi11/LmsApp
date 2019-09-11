@@ -73,6 +73,18 @@ public class TrainerDaoTest extends AbstractDaoTest{
 
     }
 
+    @Test
+    public void testGetAllTrainers(){
+        Trainer savedTrainer1 = new TrainerHelper().save(em);
+        Trainer savedTrainer2 = new TrainerHelper().save(em);
+
+        TrainerDao trainerDao = new TrainerDao(em);
+        List<Trainer> actual = trainerDao.getAllTrainers();
+
+        assertEquals(2, actual.size());
+
+    }
+
 
 
 }

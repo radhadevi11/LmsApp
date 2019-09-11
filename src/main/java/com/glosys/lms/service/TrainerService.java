@@ -14,4 +14,8 @@ public class TrainerService {
     public List<Trainer> getAvailableTrainers(LocalDate localDate){
         return DaoFactory.getTrainerDao().getAvailableTrainers(localDate);
     }
+
+    public List<Trainer> getAllTrainers(){
+        return DaoFactory.getTrainerDao().getAllTrainers();
+    }
 }

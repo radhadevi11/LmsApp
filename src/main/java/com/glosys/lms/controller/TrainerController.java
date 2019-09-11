@@ -16,4 +16,8 @@ public class TrainerController {
     public List<Trainer> getAvailableTrainers(LocalDate localDate){
         return trainerService.getAvailableTrainers(localDate);
     }
+
+    public List<Trainer> getAllTrainers(){
+        return trainerService.getAllTrainers();
+    }
 }
