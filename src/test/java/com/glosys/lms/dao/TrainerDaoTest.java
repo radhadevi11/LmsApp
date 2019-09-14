@@ -26,7 +26,7 @@ public class TrainerDaoTest extends AbstractDaoTest{
     @Before
     public  void setUp() throws Exception {
         JdbcDatabaseTester databaseTester = new JdbcDatabaseTester("org.h2.Driver", "jdbc:h2:mem:test");
-        String[] tables = {"trainer, workshop"};
+        String[] tables = {"trainer", "workshop"};
         IDataSet dataSet = databaseTester.getConnection().createDataSet(tables);
         databaseTester.setDataSet(dataSet);
         databaseTester.onSetup();
@@ -48,8 +48,8 @@ public class TrainerDaoTest extends AbstractDaoTest{
 
     @Test
     public void testGetAvailableTrainers(){
-        Trainer savedTrainer1 = new TrainerHelper().save(em);
-        Trainer savedTrainer2 = new TrainerHelper().save(em);
+        Trainer savedTrainer1 = new TrainerHelper().save(em, "Shubha");
+        Trainer savedTrainer2 = new TrainerHelper().save(em, "Hema");
         new WorkshopHelper().save(em, LocalDate.of(2019,05,15),savedTrainer1);
 
         TrainerDao trainerDao = new TrainerDao(em);
@@ -61,8 +61,8 @@ public class TrainerDaoTest extends AbstractDaoTest{
 
     @Test
     public void testGetAvailableTrainersWithPastTrainingDate(){
-        Trainer savedTrainer1 = new TrainerHelper().save(em);
-        Trainer savedTrainer2 = new TrainerHelper().save(em);
+        Trainer savedTrainer1 = new TrainerHelper().save(em, "Shalini");
+        Trainer savedTrainer2 = new TrainerHelper().save(em, "Sindhu");
         new WorkshopHelper().save(em, LocalDate.of(2018,05,15),savedTrainer1);
 
         TrainerDao trainerDao = new TrainerDao(em);
@@ -75,8 +75,8 @@ public class TrainerDaoTest extends AbstractDaoTest{
 
     @Test
     public void testGetAllTrainers(){
-        Trainer savedTrainer1 = new TrainerHelper().save(em);
-        Trainer savedTrainer2 = new TrainerHelper().save(em);
+        Trainer savedTrainer1 = new TrainerHelper().save(em, "Radha");
+        Trainer savedTrainer2 = new TrainerHelper().save(em, "vishnu");
 
         TrainerDao trainerDao = new TrainerDao(em);
         List<Trainer> actual = trainerDao.getAllTrainers();

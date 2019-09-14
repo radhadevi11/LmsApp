@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "workshop")
-public class Workshop {
+public class Workshop implements TrainingProgram {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "workshop_id")
@@ -95,5 +95,10 @@ public class Workshop {
 
     public void setTrainer(Trainer trainer) {
         this.trainer = trainer;
+    }
+
+    @Override
+    public LocalDate getStartDate() {
+        return this.date;
     }
 }

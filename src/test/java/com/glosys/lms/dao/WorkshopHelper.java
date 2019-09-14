@@ -15,7 +15,7 @@ public class WorkshopHelper {
 
     public Workshop save(EntityManager em, LocalDate workshopDate){
         Workshop workshop = new Workshop(new WorkshopTypeHelper().save(em), new CourseHelper().save(em), workshopDate,
-                new TrainerHelper().save(em));
+                new TrainerHelper().save(em, "Nivetha"));
         return new WorkshopDao(em).save(workshop);
     }
 }

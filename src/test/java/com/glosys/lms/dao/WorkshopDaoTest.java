@@ -43,7 +43,7 @@ public class WorkshopDaoTest extends AbstractDaoTest {
 
         Course course1 = new CourseHelper().save(em);
         WorkshopType workshopType1 = new WorkshopTypeHelper().save(em);
-        Trainer trainer = new TrainerHelper().save(em);
+        Trainer trainer = new TrainerHelper().save(em, "Swetha");
         Workshop workshop = new Workshop(workshopType1, course1, LocalDate.of(2019, 10, 25), trainer);
         WorkshopDao workshopDao = new WorkshopDao(em);
         workshopDao.save(workshop);

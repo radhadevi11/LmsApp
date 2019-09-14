@@ -35,6 +35,10 @@ public class Trainer {
         this.id = id;
     }
 
+    public Trainer(String firstName) {
+        this(firstName, null,null ,null ,null ,null );
+    }
+
     public Trainer(String firstName, String lastName, String gender, String knownCourses,
                    String userName, String password) {
         this(null, firstName, lastName, gender, knownCourses, userName, password);
@@ -50,6 +54,8 @@ public class Trainer {
         this.userName = userName;
         this.password = password;
     }
+
+
 
     public Integer getId() {
         return id;

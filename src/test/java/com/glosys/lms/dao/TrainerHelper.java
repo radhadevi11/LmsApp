@@ -5,8 +5,8 @@ import com.glosys.lms.entity.Trainer;
 import javax.persistence.EntityManager;
 
 public class TrainerHelper {
-    public Trainer save(EntityManager em){
+    public Trainer save(EntityManager em, String firstName){
         TrainerDao trainerDao = new TrainerDao(em);
-        return trainerDao.save(new Trainer());
+        return trainerDao.save(new Trainer(firstName));
     }
 }

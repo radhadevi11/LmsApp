@@ -1,10 +1,11 @@
 package com.glosys.lms.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "inplant_training")
-public class InplantTraining {
+public class InplantTraining implements TrainingProgram{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "inplant_training_id")
@@ -33,4 +34,8 @@ public class InplantTraining {
     }
 
 
+    @Override
+    public LocalDate getStartDate() {
+        return LocalDate.now();
+    }
 }
