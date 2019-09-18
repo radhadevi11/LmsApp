@@ -104,4 +104,30 @@ CREATE TABLE `workshop_enrolment` (
   FOREIGN KEY (`workshop_id`) REFERENCES `workshop` (`workshop_id`)
 );
 
+CREATE TABLE `inplant_training_type` (
+  `inplant_training_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `mode_of_training` varchar(45) DEFAULT NULL,
+  `no_of_programs` int(11) DEFAULT NULL,
+  `total_days` int(11) DEFAULT NULL,
+  `total_hours` int(11) DEFAULT NULL,
+  `hours_per_day` int(11) DEFAULT NULL,
+  `package` varchar(50) DEFAULT NULL,
+  `cost` double DEFAULT NULL,
+  PRIMARY KEY (`inplant_training_type_id`)
+);
 
+
+CREATE TABLE `inplant_training` (
+  `inplant_training_id` int(11) NOT NULL AUTO_INCREMENT,
+  `inplant_training_type_id` int(11) DEFAULT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  `inplant_date` date DEFAULT NULL,
+  `trainer_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`inplant_training_id`),
+  CONSTRAINT `course_id_inplan_fk`
+  FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
+  CONSTRAINT `inplant_training_type_id_fk`
+  FOREIGN KEY (`inplant_training_type_id`) REFERENCES `inplant_training_type` (`inplant_training_type_id`),
+  CONSTRAINT `trainer_id_inplan_fk`
+  FOREIGN KEY (`trainer_id`) REFERENCES `trainer` (`trainer_id`)
+);

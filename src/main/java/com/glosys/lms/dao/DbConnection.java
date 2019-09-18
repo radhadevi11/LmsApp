@@ -5,12 +5,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class DbConnection {
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("com.radha.lms");
+    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    public static EntityManagerFactory getEntityManagerFactory(){
-        return Persistence.createEntityManagerFactory("com.radha.lms");
 
-    }
     public static EntityManager getEntityManager(){
-        return getEntityManagerFactory().createEntityManager();
+        return entityManager;
     }
 }

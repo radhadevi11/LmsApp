@@ -111,6 +111,21 @@ public class WorkshopDaoTest extends AbstractDaoTest {
 
     }
 
+    @Test
+    public void testGetWorkshopTrainings(){
+        LocalDate currentDate = LocalDate.now();
+        Workshop workshop = new WorkshopHelper().save(em,currentDate.plusDays(5));
+        Workshop workshop2 = new WorkshopHelper().save(em,currentDate.plusDays(5), workshop.getTrainer());
+        Workshop workshop3 = new WorkshopHelper().save(em,currentDate.minusDays(5), workshop.getTrainer());
+        Workshop workshop4 = new WorkshopHelper().save(em,currentDate.plusDays(5));
+
+        WorkshopDao workshopDao = new WorkshopDao(em);
+        List<Workshop> actual = workshopDao.getWorkshopTrainings(workshop.getTrainer().getId());
+        assertEquals(2, actual.size());
+
+
+    }
+
 
 
 }

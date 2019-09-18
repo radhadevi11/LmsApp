@@ -2,11 +2,18 @@ package com.glosys.lms.dao;
 
 import com.glosys.lms.entity.InplantTrainingType;
 
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class InplantTrainingTypeDao extends AbstractDao<InplantTrainingType> {
+    public InplantTrainingTypeDao() {
+        super();
+    }
 
+    public InplantTrainingTypeDao(EntityManager entityManager) {
+        super(entityManager);
+    }
 
 
     public List<InplantTrainingType> getInplantTrainingTypes(){
