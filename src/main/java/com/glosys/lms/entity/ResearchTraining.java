@@ -23,6 +23,8 @@ public class ResearchTraining {
     private String modeOfTraining;
 
 
+
+
     public ResearchTraining() {
 
     }

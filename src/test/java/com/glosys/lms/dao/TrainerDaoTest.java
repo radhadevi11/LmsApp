@@ -100,12 +100,31 @@ public class TrainerDaoTest extends AbstractDaoTest{
     }
 
     @Test
-    public void testGetInValidTrainer(){
+    public void testGetInValidUserNameTrainer(){
+        Trainer trainer = new Trainer("Radha", null, null, null, "Radha33", "radha");
+
         TrainerDao trainerDao = new TrainerDao(em);
 
-        Trainer actual = trainerDao.getValidTrainer("Radha33", "radha33");
+        Trainer savedTrainer = trainerDao.save(trainer);
+
+        Trainer actual = trainerDao.getValidTrainer("Radha", "radha");
 
         assertNull(actual);
+
+    }
+
+    @Test
+    public void testGetInValidPasswordTrainer(){
+        Trainer trainer = new Trainer("Radha", null, null, null, "Radha33", "radha");
+
+        TrainerDao trainerDao = new TrainerDao(em);
+
+        Trainer savedTrainer = trainerDao.save(trainer);
+
+        Trainer actual = trainerDao.getValidTrainer("Radha33", "ra");
+
+        assertNull(actual);
+
     }
 
 

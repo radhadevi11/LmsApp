@@ -9,4 +9,8 @@ public interface TrainingProgram extends Comparable<TrainingProgram> {
     default int compareTo(TrainingProgram trainingProgram){
         return this.getStartDate().compareTo(trainingProgram.getStartDate());
     }
+
+    TrainingProgramTypeEnum getTrainingProgramType();
+
+    String getDuration();
 }

@@ -35,13 +35,10 @@ public class TrainerService  {
                                                      InplantTrainingDao inplantTrainingDao){
         List<TrainingProgram> trainingPrograms = new ArrayList<>();
         List<Workshop> workshops = workshopDao.getWorkshopTrainings(trainerId);
-        for (Workshop workshop : workshops){
-            trainingPrograms.add(workshop);
-        }
+
         List<InplantTraining> inplantTrainings = inplantTrainingDao.getInplantTrainings(trainerId);
-        for (InplantTraining inplantTraining : inplantTrainings){
-            trainingPrograms.add(inplantTraining);
-        }
+        trainingPrograms.addAll(workshops);
+        trainingPrograms.addAll(inplantTrainings);
         return trainingPrograms.stream().sorted().collect(Collectors.toList());
 
     }

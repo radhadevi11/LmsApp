@@ -101,4 +101,14 @@ public class Workshop implements TrainingProgram {
     public LocalDate getStartDate() {
         return this.date;
     }
+
+    @Override
+    public TrainingProgramTypeEnum getTrainingProgramType() {
+        return TrainingProgramTypeEnum.WORKSHOP;
+    }
+
+    @Override
+    public String getDuration() {
+        return getWorkshopType().getTotalDays()+" days("+"\n"+getWorkshopType().getHoursPerDay()+" Hours per day)";
+    }
 }

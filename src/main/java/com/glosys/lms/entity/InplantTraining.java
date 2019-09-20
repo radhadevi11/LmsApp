@@ -92,4 +92,15 @@ public class InplantTraining implements TrainingProgram{
     public LocalDate getStartDate() {
         return this.date;
     }
+
+    @Override
+    public TrainingProgramTypeEnum getTrainingProgramType() {
+        return TrainingProgramTypeEnum.INPLANT_TRAINING;
+    }
+
+    @Override
+    public String getDuration() {
+        return getInplantTrainingType().getTotalDays()+ " days("+"\n"+ getInplantTrainingType().getHoursPerDay()+" " +
+                "Hours per day)";
+    }
 }

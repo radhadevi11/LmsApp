@@ -11,6 +11,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.persistence.EntityManager;
 import java.io.FileNotFoundException;
@@ -19,9 +25,25 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
 
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
+@RunWith(MockitoJUnitRunner.class)
 public class TrainerServiceTest extends AbstractDaoTest {
+
+    public static final int TRAINER_ID = 1;
+
+    @InjectMocks
+    @Spy
+    TrainerService trainerService;
+
+    @Mock
+    WorkshopDao workshopDao;
+
+    @Mock
+    InplantTrainingDao inplantTrainingDao;
+
     protected static EntityManager em ;
     @BeforeClass
     public static void init() throws FileNotFoundException, SQLException {
@@ -41,6 +63,26 @@ public class TrainerServiceTest extends AbstractDaoTest {
     @After
     public void after(){
         em.clear();
+    }
+
+    @Test
+    public void mockTestGetTrainingPrograms(){
+        List<TrainingProgram> trainingPrograms = mock(List.class);
+        List<Workshop> workshops = workshopDao.getWorkshopTrainings(TRAINER_ID);
+        List<InplantTraining> inplantTrainings = inplantTrainingDao.getInplantTrainings(TRAINER_ID);
+        doReturn(true).when(trainingPrograms).addAll(workshops);
+        doReturn(true).when(trainingPrograms).addAll(inplantTrainings);
+
+        List<TrainingProgram> actual =  trainerService.getTrainingPrograms(TRAINER_ID);
+
+        verify(workshopDao).getWorkshopTrainings(TRAINER_ID);
+        verify(inplantTrainingDao).getInplantTrainings(TRAINER_ID);
+        verify(trainingPrograms).addAll(workshops);
+        verify(trainingPrograms).addAll(inplantTrainings);
+
+
+
+
     }
 
 
