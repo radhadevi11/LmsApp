@@ -4,7 +4,8 @@ public enum TrainingProgramTypeEnum {
     WORKSHOP(1, "Workshop"),
     INPLANT_TRAINING(2, "Inplant Training"),
     CORPORATE_TRAINING(3, "Corporate Training"),
-    RESEARCH_TRAINING(4, "Research Training");
+    RESEARCH_TRAINING(4, "Research Training"),
+    CERTIFICATE(5, "Certificate");
 
     private int id;
     private String name;

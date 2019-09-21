@@ -12,5 +12,12 @@ public interface TrainingProgram extends Comparable<TrainingProgram> {
 
     TrainingProgramTypeEnum getTrainingProgramType();
 
+
+
     String getDuration();
+
+
+    default String getName() {
+        return getTrainingProgramType().getName();
+    }
 }

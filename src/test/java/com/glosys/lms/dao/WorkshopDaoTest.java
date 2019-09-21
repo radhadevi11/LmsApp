@@ -1,6 +1,7 @@
 package com.glosys.lms.dao;
 
 import com.glosys.lms.entity.*;
+
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.junit.*;
@@ -127,5 +128,63 @@ public class WorkshopDaoTest extends AbstractDaoTest {
     }
 
 
+    @Test
+    public void getSearchResultsFromWorkshop() {
 
+        WorkshopDao workshopDao = new WorkshopDao(em);
+        Student student = new StudentHelper().save(em);
+        Workshop workshop = new WorkshopHelper().save(em, LocalDate.now());
+        workshop.getCourse().setName("Web application development using python");
+
+        List<Workshop> actual = workshopDao.getSearchResultsFromWorkshop("python", student.getId());
+
+        assertEquals(actual.size(), 1);
+
+    }
+
+    @Test
+    public void getSearchResultsFromWorkshopWithCaseInSensitive() {
+
+        WorkshopDao workshopDao = new WorkshopDao(em);
+        Student student = new StudentHelper().save(em);
+        Workshop workshop = new WorkshopHelper().save(em, LocalDate.now());
+        workshop.getCourse().setName("Web application development using PYTHON");
+
+        List<Workshop> actual = workshopDao.getSearchResultsFromWorkshop("Python", student.getId());
+
+        assertEquals(actual.size(), 1);
+
+    }
+
+    @Test
+    public void getSearchResultsFromWorkshopForAlreadyEnrolledStudent() {
+
+        WorkshopDao workshopDao = new WorkshopDao(em);
+        Student student = new StudentHelper().save(em);
+        Workshop workshop = new WorkshopHelper().save(em, LocalDate.now());
+        workshop.getCourse().setName("Web application development using PYTHON");
+        WorkshopEnrolment workshopEnrolment = new WorkshopEnrolmentHelper().save(em, LocalDate.now());
+        workshopEnrolment.setWorkshop(workshop);
+        workshopEnrolment.setStudent(student);
+
+        List<Workshop> actual = workshopDao.getSearchResultsFromWorkshop("Python", student.getId());
+
+        assertEquals(actual.size(), 0);
+
+    }
+
+    @Test
+    public void getSearchResultsFromWorkshopForPastWorkshop() {
+
+        WorkshopDao workshopDao = new WorkshopDao(em);
+        Student student = new StudentHelper().save(em);
+        Workshop workshop = new WorkshopHelper().save(em, LocalDate.now().minusDays(5));
+        workshop.getCourse().setName("Web application development using PYTHON");
+
+
+        List<Workshop> actual = workshopDao.getSearchResultsFromWorkshop("Python", student.getId());
+
+        assertEquals(actual.size(), 0);
+
+    }
 }

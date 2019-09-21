@@ -1,9 +1,6 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.entity.Course;
-import com.glosys.lms.entity.InplantTraining;
-import com.glosys.lms.entity.InplantTrainingType;
-import com.glosys.lms.entity.Trainer;
+import com.glosys.lms.entity.*;
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.junit.After;
@@ -70,4 +67,15 @@ public class InplantTrainingDaoTest extends AbstractDaoTest{
 
     }
 
+    @Test
+    public void testGetSearchResultsFromInplantTraining(){
+        InplantTrainingDao inplantTrainingDao = new InplantTrainingDao(em);
+        Student student = new StudentHelper().save(em);
+        InplantTraining inplantTraining = new InplantTrainingHelper().save(em, LocalDate.now());
+        inplantTraining.getCourse().setName("Web application development using python");
+
+        List<InplantTraining> actual = inplantTrainingDao.getSearchResultsFromInplantTraining("python", student.getId());
+
+        assertEquals(actual.size(), 1);
+    }
 }

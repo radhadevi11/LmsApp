@@ -17,6 +17,9 @@
         <class>com.glosys.lms.entity.Trainer</class>
         <class>com.glosys.lms.entity.InplantTrainingType</class>
         <class>com.glosys.lms.entity.InplantTraining</class>
+        <class>com.glosys.lms.entity.Certificate</class>
+        <class>com.glosys.lms.entity.CertificateEnrolment</class>
+        <class>com.glosys.lms.entity.InplantTrainingEnrolment</class>
 
         <properties>
             <!-- Configuring JDBC properties -->

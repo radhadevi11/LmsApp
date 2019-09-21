@@ -3,47 +3,44 @@ package com.glosys.lms.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "workshop")
-public class Workshop implements TrainingProgram {
+@Table
+@Entity(name = "certificate")
+public class Certificate implements TrainingProgram {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "workshop_id")
+    @Column(name = "certificate_id")
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "workshop_type_id")
-    private WorkshopType workshopType;
-    
-    @ManyToOne
+    @Column(name = "name")
+    private String name;
+
+    @OneToOne
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @Column(name="workshop_date")
+    @Column(name = "certificate_date")
     private LocalDate date;
 
     @OneToOne
     @JoinColumn(name = "trainer_id")
     private Trainer trainer;
 
-
-    public Workshop() {
+    public Certificate() {
     }
 
-
-    public Workshop(WorkshopType workshopType, Course course, LocalDate date, Trainer trainer) {
-        this(null, workshopType, course, date, trainer);
+    public Certificate(String name, Course course, LocalDate date, Trainer trainer) {
+        this(null, name, course, date, trainer);
     }
 
-    public Workshop(Integer id, WorkshopType workshopType, Course course, LocalDate date, Trainer trainer) {
+    public Certificate(Integer id, String name, Course course, LocalDate date, Trainer trainer) {
         this.id = id;
-        this.workshopType = workshopType;
+        this.name = name;
         this.course = course;
         this.date = date;
         this.trainer = trainer;
     }
 
-    public Workshop(Integer id) {
+    public Certificate(Integer id) {
         this.id = id;
     }
 
@@ -55,12 +52,12 @@ public class Workshop implements TrainingProgram {
         this.id = id;
     }
 
-    public WorkshopType getWorkshopType() {
-        return workshopType;
+    public String getName() {
+        return name;
     }
 
-    public void setWorkshopType(WorkshopType workshopType) {
-        this.workshopType = workshopType;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Course getCourse() {
@@ -79,16 +76,6 @@ public class Workshop implements TrainingProgram {
         this.date = date;
     }
 
-    @Override
-    public String toString() {
-        return "Workshop{" +
-                "id=" + id +
-                ", workshopType=" + workshopType +
-                ", course=" + course +
-                ", date=" + date +
-                '}';
-    }
-
     public Trainer getTrainer() {
         return trainer;
     }
@@ -104,11 +91,11 @@ public class Workshop implements TrainingProgram {
 
     @Override
     public TrainingProgramTypeEnum getTrainingProgramType() {
-        return TrainingProgramTypeEnum.WORKSHOP;
+        return TrainingProgramTypeEnum.CERTIFICATE;
     }
 
     @Override
     public String getDuration() {
-        return getWorkshopType().getTotalDays()+" days"+"\n"+getWorkshopType().getHoursPerDay()+" Hours per day";
+        return "3 Months";
     }
 }

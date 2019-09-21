@@ -131,3 +131,38 @@ CREATE TABLE `inplant_training` (
   CONSTRAINT `trainer_id_inplan_fk`
   FOREIGN KEY (`trainer_id`) REFERENCES `trainer` (`trainer_id`)
 );
+
+
+CREATE TABLE `certificate` (
+  `certificate_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  `total_month` int(11) DEFAULT NULL,
+  `certificate_date` date DEFAULT NULL,
+  `trainer_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`certificate_id`),
+  CONSTRAINT `course_id_certificate_fk` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
+  CONSTRAINT `trainer_id_certificate_fk` FOREIGN KEY (`trainer_id`) REFERENCES `trainer` (`trainer_id`)
+);
+
+CREATE TABLE `certificate_enrolment` (
+  `certificate_enrolment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `certificate_id` int(11) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`certificate_enrolment_id`),
+  CONSTRAINT `certificate_id_certificate_enrollment_fk` FOREIGN KEY (`certificate_id`) REFERENCES `certificate` (`certificate_id`),
+  CONSTRAINT `student_id_certificate_enrollment_fk` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`)
+);
+
+CREATE TABLE `inplant_training_enrolment` (
+  `inplant_training_enrolment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) DEFAULT NULL,
+  `inplant_training_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`inplant_training_enrolment_id`),
+  CONSTRAINT `inplant_training_id_inplant_training_enrolment_fk` FOREIGN KEY (`inplant_training_id`) REFERENCES `inplant_training` (`inplant_training_id`),
+  CONSTRAINT `student_id_inplant_training_enrolment_fk` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`)
+);
+
+
+
+

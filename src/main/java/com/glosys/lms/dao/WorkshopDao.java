@@ -78,5 +78,27 @@ public class WorkshopDao extends AbstractDao<Workshop> {
 
     }
 
+    public List<Workshop> getSearchResultsFromWorkshop(String courseName, int studentId){
+
+        try{
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("SELECT w FROM Workshop w WHERE w.date >= CURRENT_DATE " +
+                    "AND lower(w.course.name) LIKE lower(:courseName) AND" +
+                    " NOT EXISTS (SELECT we.workshop.id FROM WorkshopEnrolment we " +
+                    "WHERE we.workshop.id=w.id AND we.student.id=:studentId)");
+            query.setParameter("courseName",  "%" +courseName+ "%");
+            query.setParameter("studentId", studentId);
+            entityManager.getTransaction().commit();
+            return query.getResultList();
+
+        }catch (Exception e){
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
+            throw new RuntimeException("Can not get search result for workshop trainings");
+        }
+
+    }
+
 
 }

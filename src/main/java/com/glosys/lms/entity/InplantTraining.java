@@ -98,6 +98,8 @@ public class InplantTraining implements TrainingProgram{
         return TrainingProgramTypeEnum.INPLANT_TRAINING;
     }
 
+
+
     @Override
     public String getDuration() {
         return getInplantTrainingType().getTotalDays()+ " days("+"\n"+ getInplantTrainingType().getHoursPerDay()+" " +
