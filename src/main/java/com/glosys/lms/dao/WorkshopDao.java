@@ -55,7 +55,7 @@ public class WorkshopDao extends AbstractDao<Workshop> {
             if(entityManager.getTransaction().isActive()){
                 entityManager.getTransaction().rollback();
             }
-            throw new RuntimeException("Can not get future workshops");
+            throw new RuntimeException("Can not get future workshops", e);
         }
 
     }
@@ -73,7 +73,7 @@ public class WorkshopDao extends AbstractDao<Workshop> {
             if(entityManager.getTransaction().isActive()){
                 entityManager.getTransaction().rollback();
             }
-            throw new RuntimeException("Can not get workshop trainings");
+            throw new RuntimeException("Can not get workshop trainings",e);
         }
 
     }
@@ -95,7 +95,7 @@ public class WorkshopDao extends AbstractDao<Workshop> {
             if(entityManager.getTransaction().isActive()){
                 entityManager.getTransaction().rollback();
             }
-            throw new RuntimeException("Can not get search result for workshop trainings");
+            throw new RuntimeException("Can not get search result for workshop trainings", e);
         }
 
     }

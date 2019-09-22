@@ -1,50 +1,51 @@
 package com.glosys.lms.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
-@Entity
 @Table(name = "research_training")
+@Entity
 public class ResearchTraining {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "research_training_id")
-    private Integer id ;
+    private Integer id;
 
-    @Column(name = "duration")
-    private String duration;
-
-    @Column (name = "cost")
-    private double cost;
-
-    @Column(name = "no_of_courses ")
-    private int noOfCourses;
-
-    @Column(name = "mode_of_training")
-    private String modeOfTraining;
+    @ManyToOne
+    @JoinColumn(name = "research_training_type_id")
+    private  ResearchTrainingType ResearchTrainingType;
 
 
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
+    @Column(name = "start_date")
+    private LocalDate date;
 
-    public ResearchTraining() {
+    @OneToOne
+    @JoinColumn(name="trainer_id")
+    private Trainer trainer;
 
-    }
-
-
-    public ResearchTraining(String duration, double cost, int noOfCourses, String modeOfTraining) {
-        this(null,duration, cost, noOfCourses , modeOfTraining);
-    }
-
-    public ResearchTraining(Integer id, String duration, double cost, int noOfCourses, String modeOfTraining) {
-        this.id = id;
-        this.duration = duration;
-        this.cost = cost;
-        this.noOfCourses = noOfCourses;
-        this.modeOfTraining = modeOfTraining;
-
+    public ResearchTraining(com.glosys.lms.entity.ResearchTrainingType researchTrainingType,
+                        Course course, LocalDate date, Trainer trainer) {
+        this(null, researchTrainingType, course, date, trainer);
     }
 
     public ResearchTraining(Integer id) {
         this.id = id;
+    }
+
+    public ResearchTraining(Integer id, com.glosys.lms.entity.ResearchTrainingType researchTrainingType,
+                            Course course, LocalDate date, Trainer trainer) {
+        this.id = id;
+        ResearchTrainingType = researchTrainingType;
+        this.course = course;
+        this.date = date;
+        this.trainer = trainer;
+    }
+
+    public ResearchTraining() {
     }
 
     public Integer getId() {
@@ -55,36 +56,35 @@ public class ResearchTraining {
         this.id = id;
     }
 
-    public String getDuration() {
-        return duration;
+    public com.glosys.lms.entity.ResearchTrainingType getResearchTrainingType() {
+        return ResearchTrainingType;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setResearchTrainingType(com.glosys.lms.entity.ResearchTrainingType researchTrainingType) {
+        ResearchTrainingType = researchTrainingType;
     }
 
-    public double getCost() {
-        return cost;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
-    public int getNoOfCourses() {
-        return noOfCourses;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setNoOfCourses(int noOfCourses) {
-        this.noOfCourses = noOfCourses;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public String getModeOfTraining() {
-        return modeOfTraining;
+    public Trainer getTrainer() {
+        return trainer;
     }
 
-    public void setModeOfTraining(String modeOfTraining) {
-        this.modeOfTraining = modeOfTraining;
+    public void setTrainer(Trainer trainer) {
+        this.trainer = trainer;
     }
-
 }

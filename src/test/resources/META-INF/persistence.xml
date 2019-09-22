@@ -8,7 +8,7 @@
         <!-- add classes -->
         <class>com.glosys.lms.entity.Course</class>
         <class>com.glosys.lms.entity.CourseCategory</class>
-        <class>com.glosys.lms.entity.ResearchTraining</class>
+        <class>com.glosys.lms.entity.ResearchTrainingType</class>
         <class>com.glosys.lms.entity.Student</class>
         <class>com.glosys.lms.entity.WorkshopType</class>
         <class>com.glosys.lms.entity.WorkshopEnrolment</class>

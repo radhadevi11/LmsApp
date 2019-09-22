@@ -13,7 +13,7 @@ public class WorkshopHelper {
 
     public Workshop save(EntityManager em, LocalDate workshopDate, Trainer trainer) {
         Workshop workshop = new Workshop(new WorkshopTypeHelper().save(em), new CourseHelper().save(em), workshopDate,
-                trainer);
+                trainer, null);
         return new WorkshopDao(em).save(workshop);
     }
 

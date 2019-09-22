@@ -16,6 +16,7 @@ public class DaoFactory {
     private static PaymentDao paymentDao = new PaymentDao();
     private static TrainerDao trainerDao = new TrainerDao();
     private static InplantTrainingDao  inplantTrainingDao = new InplantTrainingDao();
+    private static CertificateDao certificateDao = new CertificateDao();
 
     public static StudentDaoImpl getStudentDao(){
         return studentDao;
@@ -66,5 +67,9 @@ public class DaoFactory {
 
     public static InplantTrainingDao getInplantTrainingDao() {
         return inplantTrainingDao;
+    }
+
+    public static CertificateDao getCertificateDao() {
+        return certificateDao;
     }
 }

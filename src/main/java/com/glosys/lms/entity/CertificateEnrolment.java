@@ -2,8 +2,8 @@ package com.glosys.lms.entity;
 
 import javax.persistence.*;
 
-@Entity(name = "certificate_enrolment")
-@Table
+@Entity
+@Table(name = "certificate_enrolment")
 public class CertificateEnrolment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

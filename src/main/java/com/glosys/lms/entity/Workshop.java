@@ -27,20 +27,32 @@ public class Workshop implements TrainingProgram {
     private Trainer trainer;
 
 
+
+    @Column(name = "material_path")
+    private String materialPath;
+
+
     public Workshop() {
     }
 
-
     public Workshop(WorkshopType workshopType, Course course, LocalDate date, Trainer trainer) {
-        this(null, workshopType, course, date, trainer);
+        this.workshopType = workshopType;
+        this.course = course;
+        this.date = date;
+        this.trainer = trainer;
     }
 
-    public Workshop(Integer id, WorkshopType workshopType, Course course, LocalDate date, Trainer trainer) {
+    public Workshop(WorkshopType workshopType, Course course, LocalDate date, Trainer trainer, String materialPath) {
+        this(null, workshopType, course, date, trainer, materialPath);
+    }
+
+    public Workshop(Integer id, WorkshopType workshopType, Course course, LocalDate date, Trainer trainer, String materialPath) {
         this.id = id;
         this.workshopType = workshopType;
         this.course = course;
         this.date = date;
         this.trainer = trainer;
+        this.materialPath = materialPath;
     }
 
     public Workshop(Integer id) {
@@ -110,5 +122,24 @@ public class Workshop implements TrainingProgram {
     @Override
     public String getDuration() {
         return getWorkshopType().getTotalDays()+" days"+"\n"+getWorkshopType().getHoursPerDay()+" Hours per day";
+    }
+
+    @Override
+    public double getCost() {
+        return getWorkshopType().getCost();
+    }
+
+    @Override
+    public String getUniquePath() {
+        return  String.format("%s_%s_%s_%s_%s",getName(),this.workshopType.getId(), this.course.getId(), this.trainer.getId(), date);
+    }
+
+
+    public String getMaterialPath() {
+        return materialPath;
+    }
+
+    public void setMaterialPath(String materialPath) {
+        this.materialPath = materialPath;
     }
 }

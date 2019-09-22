@@ -1,13 +1,11 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.entity.ResearchTraining;
+import com.glosys.lms.entity.ResearchTrainingType;
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.junit.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,7 +13,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 
-public class ResearchTrainingDaoTest extends AbstractDaoTest {
+public class ResearchTrainingTypeDaoTest extends AbstractDaoTest {
 
     protected static EntityManager em ;
     @BeforeClass
@@ -43,8 +41,8 @@ public class ResearchTrainingDaoTest extends AbstractDaoTest {
     @Test
     public void testGetResearchTrainings(){
         ResearchTrainingDao researchTrainingDao = new ResearchTrainingDao(em);
-        researchTrainingDao.save(new ResearchTraining());
-        List<ResearchTraining> actual = researchTrainingDao.getResearchTrainings();
+        researchTrainingDao.save(new ResearchTrainingType());
+        List<ResearchTrainingType> actual = researchTrainingDao.getResearchTrainings();
         assertEquals(1, actual.size());
 
     }

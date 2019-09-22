@@ -3,8 +3,8 @@ package com.glosys.lms.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Table
-@Entity(name = "certificate")
+@Table(name = "certificate")
+@Entity
 public class Certificate implements TrainingProgram {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +13,8 @@ public class Certificate implements TrainingProgram {
 
     @Column(name = "name")
     private String name;
+
+    private double cost;
 
     @OneToOne
     @JoinColumn(name = "course_id")
@@ -54,6 +56,16 @@ public class Certificate implements TrainingProgram {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public double getCost() {
+        return cost;
+    }
+
+    @Override
+    public String getUniquePath() {
+        return  String.format("%s_%s_%s_%s_%s",this.name,this.id, this.course.getId(), this.trainer.getId(), date);
     }
 
     public void setName(String name) {

@@ -2,33 +2,21 @@ package com.glosys.lms.service;
 
 import com.glosys.lms.dao.*;
 import com.glosys.lms.entity.InplantTraining;
-import com.glosys.lms.entity.Trainer;
 import com.glosys.lms.entity.TrainingProgram;
 import com.glosys.lms.entity.Workshop;
 import org.assertj.core.api.Assertions;
-import org.dbunit.JdbcDatabaseTester;
-import org.dbunit.dataset.IDataSet;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.persistence.EntityManager;
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -52,8 +40,8 @@ public class TrainerServiceTest  {
         LocalDate date2 = LocalDate.of(2019, 10, 26);
         LocalDate date3 = LocalDate.of(2019, 10, 27);
         LocalDate date4 = LocalDate.of(2019, 10, 28);
-        Workshop workshop1 = new Workshop(null, null, date4, null);
-        Workshop workshop2 = new Workshop(null, null, date3, null);
+        Workshop workshop1 = new Workshop(null, null, date4, null, null);
+        Workshop workshop2 = new Workshop(null, null, date3, null, null);
 
 
         InplantTraining inplantTraining1 = new InplantTraining(null, null, date2, null);

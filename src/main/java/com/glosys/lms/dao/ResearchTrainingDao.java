@@ -1,12 +1,12 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.entity.ResearchTraining;
+import com.glosys.lms.entity.ResearchTrainingType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class ResearchTrainingDao extends AbstractDao<ResearchTraining> {
+public class ResearchTrainingDao extends AbstractDao<ResearchTrainingType> {
 
     public ResearchTrainingDao() {
         super();
@@ -16,13 +16,13 @@ public class ResearchTrainingDao extends AbstractDao<ResearchTraining> {
         super(entityManager);
     }
 
-    public List<ResearchTraining> getResearchTrainings(){
+    public List<ResearchTrainingType> getResearchTrainings(){
         try{
             entityManager.getTransaction().begin();
-            TypedQuery<ResearchTraining> typedQuery = entityManager.createQuery("SELECT rt FROM ResearchTraining rt",
-                    ResearchTraining.class);
+            TypedQuery<ResearchTrainingType> typedQuery = entityManager.createQuery("SELECT rt FROM ResearchTraining rt",
+                    ResearchTrainingType.class);
             entityManager.getTransaction().commit();
-            List<ResearchTraining> resultList = typedQuery.getResultList();
+            List<ResearchTrainingType> resultList = typedQuery.getResultList();
             System.out.println("size of Research training "+resultList.size());
             return resultList;
 

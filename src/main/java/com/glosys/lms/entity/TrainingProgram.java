@@ -20,4 +20,8 @@ public interface TrainingProgram extends Comparable<TrainingProgram> {
     default String getName() {
         return getTrainingProgramType().getName();
     }
+
+    double getCost();
+
+    String getUniquePath();
 }

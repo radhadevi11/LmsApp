@@ -1,8 +1,6 @@
 package com.glosys.lms.dao;
 
-import com.glosys.lms.entity.Certificate;
-import com.glosys.lms.entity.Course;
-import com.glosys.lms.entity.Trainer;
+import com.glosys.lms.entity.*;
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.junit.After;
@@ -15,6 +13,7 @@ import javax.persistence.Table;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -50,6 +49,57 @@ public class CertificateDaoTest extends AbstractDaoTest{
         Certificate savedCertificate = certificateDao.save(certificate);
         assertEquals("certificate1", savedCertificate.getName());
 
+    }
+
+    @Test
+    public void testGetSearchResultsFromCertificate(){
+        Certificate certificate = new CertificateHelper().save(em, LocalDate.now());
+        Student student = new StudentHelper().save(em);
+        certificate.getCourse().setName("Web application development using python");
+
+        CertificateDao certificateDao = new CertificateDao(em);
+        List<Certificate> actual = certificateDao.getSearchResultsFromCertificate("python", student.getId());
+
+        assertEquals(1, actual.size() );
+    }
+
+    @Test
+    public void testGetSearchResultsFromCertificateForCaseInsensitive(){
+        Certificate certificate = new CertificateHelper().save(em, LocalDate.now());
+        Student student = new StudentHelper().save(em);
+        certificate.getCourse().setName("Web application development using python");
+
+        CertificateDao certificateDao = new CertificateDao(em);
+        List<Certificate> actual = certificateDao.getSearchResultsFromCertificate("PYTHON", student.getId());
+
+        assertEquals(1, actual.size() );
+    }
+
+    @Test
+    public void testGetSearchResultsFromCertificateForEnrolledStuent(){
+        Certificate certificate = new CertificateHelper().save(em, LocalDate.now());
+        Student student = new StudentHelper().save(em);
+        certificate.getCourse().setName("Web application development using python");
+        CertificateEnrolment certificateEnrolment = new CertificateEnrolmentHelper().save(em);
+        certificateEnrolment.setStudent(student);
+        certificateEnrolment.setCertificate(certificate);
+
+        CertificateDao certificateDao = new CertificateDao(em);
+        List<Certificate> actual = certificateDao.getSearchResultsFromCertificate("python", student.getId());
+
+        assertEquals(0, actual.size() );
+    }
+
+    @Test
+    public void testGetSearchResultsFromCertificateForPastCertificate(){
+        Certificate certificate = new CertificateHelper().save(em, LocalDate.now().minusDays(5));
+        Student student = new StudentHelper().save(em);
+        certificate.getCourse().setName("Web application development using python");
+
+        CertificateDao certificateDao = new CertificateDao(em);
+        List<Certificate> actual = certificateDao.getSearchResultsFromCertificate("python", student.getId());
+
+        assertEquals(0, actual.size() );
     }
 
 

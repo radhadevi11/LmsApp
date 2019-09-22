@@ -47,6 +47,14 @@ public class InplantTrainingType {
         this.cost = cost;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getModeOfTraining() {
         return modeOfTraining;
     }

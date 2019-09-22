@@ -78,4 +78,42 @@ public class InplantTrainingDaoTest extends AbstractDaoTest{
 
         assertEquals(actual.size(), 1);
     }
+
+    @Test
+    public void testGetSearchResultsFromInplantTrainingForCaseInsensitive(){
+        InplantTrainingDao inplantTrainingDao = new InplantTrainingDao(em);
+        Student student = new StudentHelper().save(em);
+        InplantTraining inplantTraining = new InplantTrainingHelper().save(em, LocalDate.now());
+        inplantTraining.getCourse().setName("Web application development using python");
+
+        List<InplantTraining> actual = inplantTrainingDao.getSearchResultsFromInplantTraining("PYTHON", student.getId());
+
+        assertEquals(actual.size(), 1);
+    }
+    @Test
+    public void testGetSearchResultsFromInplantTrainingForEnrolledStudent(){
+        InplantTrainingDao inplantTrainingDao = new InplantTrainingDao(em);
+        Student student = new StudentHelper().save(em);
+        InplantTraining inplantTraining = new InplantTrainingHelper().save(em, LocalDate.now());
+        inplantTraining.getCourse().setName("Web application development using python");
+        InplantTrainingEnrolment inplantTrainingEnrolment = new InplantTrainingEnrolmentHelper().save(em);
+        inplantTrainingEnrolment.setStudent(student);
+        inplantTrainingEnrolment.setInplantTraining(inplantTraining);
+
+        List<InplantTraining> actual = inplantTrainingDao.getSearchResultsFromInplantTraining("python", student.getId());
+
+        assertEquals(actual.size(), 0);
+    }
+
+    @Test
+    public void testGetSearchResultsFromInplantTrainingForPastTraining(){
+        InplantTrainingDao inplantTrainingDao = new InplantTrainingDao(em);
+        Student student = new StudentHelper().save(em);
+        InplantTraining inplantTraining = new InplantTrainingHelper().save(em, LocalDate.now().minusDays(5));
+        inplantTraining.getCourse().setName("Web application development using python");
+
+        List<InplantTraining> actual = inplantTrainingDao.getSearchResultsFromInplantTraining("python", student.getId());
+
+        assertEquals(actual.size(), 0);
+    }
 }

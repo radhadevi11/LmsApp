@@ -105,4 +105,14 @@ public class InplantTraining implements TrainingProgram{
         return getInplantTrainingType().getTotalDays()+ " days("+"\n"+ getInplantTrainingType().getHoursPerDay()+" " +
                 "Hours per day)";
     }
+
+    @Override
+    public double getCost() {
+        return getInplantTrainingType().getCost();
+    }
+
+    @Override
+    public String getUniquePath() {
+        return  String.format("%s_%s_%s_%s_%s",getName(),this.inplantTrainingType.getId(), this.course.getId(), this.trainer.getId(), date);
+    }
 }
