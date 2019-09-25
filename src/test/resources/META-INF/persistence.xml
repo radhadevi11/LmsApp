@@ -21,6 +21,7 @@
         <class>com.glosys.lms.entity.CertificateEnrolment</class>
         <class>com.glosys.lms.entity.InplantTrainingEnrolment</class>
 
+
         <properties>
             <!-- Configuring JDBC properties -->
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'classpath:create.sql'\;RUNSCRIPT FROM 'classpath:data.sql'"/>

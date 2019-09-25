@@ -16,10 +16,6 @@ public class ResearchTraining {
     private  ResearchTrainingType ResearchTrainingType;
 
 
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
-
     @Column(name = "start_date")
     private LocalDate date;
 
@@ -27,9 +23,20 @@ public class ResearchTraining {
     @JoinColumn(name="trainer_id")
     private Trainer trainer;
 
+    public ResearchTraining(Integer id, com.glosys.lms.entity.ResearchTrainingType researchTrainingType, LocalDate date, Trainer trainer, String materialPath) {
+        this.id = id;
+        ResearchTrainingType = researchTrainingType;
+        this.date = date;
+        this.trainer = trainer;
+        this.materialPath = materialPath;
+    }
+
+    @Column(name="material_path")
+    private String materialPath;
+
     public ResearchTraining(com.glosys.lms.entity.ResearchTrainingType researchTrainingType,
                         Course course, LocalDate date, Trainer trainer) {
-        this(null, researchTrainingType, course, date, trainer);
+        this(null, researchTrainingType, date, trainer);
     }
 
     public ResearchTraining(Integer id) {
@@ -37,10 +44,9 @@ public class ResearchTraining {
     }
 
     public ResearchTraining(Integer id, com.glosys.lms.entity.ResearchTrainingType researchTrainingType,
-                            Course course, LocalDate date, Trainer trainer) {
+                            LocalDate date, Trainer trainer) {
         this.id = id;
         ResearchTrainingType = researchTrainingType;
-        this.course = course;
         this.date = date;
         this.trainer = trainer;
     }
@@ -64,14 +70,6 @@ public class ResearchTraining {
         ResearchTrainingType = researchTrainingType;
     }
 
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
     public LocalDate getDate() {
         return date;
     }
@@ -86,5 +84,13 @@ public class ResearchTraining {
 
     public void setTrainer(Trainer trainer) {
         this.trainer = trainer;
+    }
+
+    public String getMaterialPath() {
+        return materialPath;
+    }
+
+    public void setMaterialPath(String materialPath) {
+        this.materialPath = materialPath;
     }
 }

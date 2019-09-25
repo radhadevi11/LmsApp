@@ -35,4 +35,22 @@ public class CertificateDao extends AbstractDao<Certificate> {
         }
 
     }
+
+    public List<Certificate> getCertificatesByCourseCategoryId(int courseCategoryId){
+        try{
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("SELECT c FROM Certificate c WHERE " +
+                    "c.course.courseCategory.id=:courseCategoryId");
+            query.setParameter("courseCategoryId", courseCategoryId);
+            entityManager.getTransaction().commit();
+            return query.getResultList();
+
+        }catch (Exception e){
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
+            throw new RuntimeException("Can not get certificate for this course category", e);
+        }
+
+    }
 }

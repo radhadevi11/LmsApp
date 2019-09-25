@@ -41,10 +41,11 @@ public class LoginDaoTest extends AbstractDaoTest {
     @Test
     public void testGetValidUser(){
         StudentDaoImpl studentDao = new StudentDaoImpl(em);
-        studentDao.save(new Student("Some",null,null,"test@gmail.com",null,"psw"));
+        Student student = new Student("Some", null, null, "test@gmail.com", null, "psw");
+        Student savedStudent = studentDao.save(student);
         LoginDao loginDao = new LoginDao(em);
         Student actual = loginDao.getValidUser("test@gmail.com", "psw");
-        assertEquals("Some", actual.getFirstName());
+        assertEquals(savedStudent.getFirstName(), actual.getFirstName());
         assertNotNull(actual);
     }
 

@@ -102,5 +102,27 @@ public class CertificateDaoTest extends AbstractDaoTest{
         assertEquals(0, actual.size() );
     }
 
+    @Test
+    public void getCertificateByCourseCategory(){
+        CourseCategoryDao courseCategoryDao = new CourseCategoryDao(em);
+        CourseCategory courseCategory = new CourseCategory("psp");
+        CourseCategory courseCategory1 = courseCategoryDao.save(courseCategory);
+
+
+        Course course = new Course("JAVA", "","", courseCategory1, true,true,true,true);
+        CourseDao courseDao = new CourseDao(em);
+        Course course1 = courseDao.save(course);
+
+        Certificate certificate = new Certificate("GCPSP", course1, null, null);
+
+        CertificateDao certificateDao = new CertificateDao(em);
+        Certificate certificate1 = certificateDao.save(certificate);
+
+        List<Certificate> actual = certificateDao.getCertificatesByCourseCategoryId(courseCategory1.getId());
+
+        assertEquals(1, actual.size());
+
+    }
+
 
 }

@@ -4,17 +4,15 @@ create table course_category
 		primary key,
 	name varchar(100) null
 );
+CREATE TABLE `research_training_type` (
+  `research_training_type_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `duration` varchar(45) DEFAULT NULL,
+  `cost` double DEFAULT NULL,
+  `no_of_courses` int(11) DEFAULT NULL,
+  `mode_of_training` varchar(45) DEFAULT NULL
 
-
-create table research_training
-(
-    research_training_id int auto_increment
-        primary key,
-    duration varchar(45) null,
-    cost double null,
-    no_of_courses int(11) null,
-    mode_of_training varchar(45) null
 );
+
 
 
   CREATE TABLE `workshop_type`(
@@ -75,6 +73,7 @@ CREATE TABLE `workshop` (
   `course_id` int(11) DEFAULT NULL,
   `workshop_date` date DEFAULT NULL,
   `trainer_id` int(11) DEFAULT NULL,
+  `material_path` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`workshop_id`),
   CONSTRAINT `course_id_fk`
   FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
@@ -123,6 +122,7 @@ CREATE TABLE `inplant_training` (
   `course_id` int(11) DEFAULT NULL,
   `inplant_date` date DEFAULT NULL,
   `trainer_id` int(11) DEFAULT NULL,
+  `material_path` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`inplant_training_id`),
   CONSTRAINT `course_id_inplan_fk`
   FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
@@ -140,6 +140,8 @@ CREATE TABLE `certificate` (
   `total_month` int(11) DEFAULT NULL,
   `certificate_date` date DEFAULT NULL,
   `trainer_id` int(11) DEFAULT NULL,
+  `cost` double DEFAULT NULL,
+  `material_path` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`certificate_id`),
   CONSTRAINT `course_id_certificate_fk` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
   CONSTRAINT `trainer_id_certificate_fk` FOREIGN KEY (`trainer_id`) REFERENCES `trainer` (`trainer_id`)
@@ -162,6 +164,34 @@ CREATE TABLE `inplant_training_enrolment` (
   CONSTRAINT `inplant_training_id_inplant_training_enrolment_fk` FOREIGN KEY (`inplant_training_id`) REFERENCES `inplant_training` (`inplant_training_id`),
   CONSTRAINT `student_id_inplant_training_enrolment_fk` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`)
 );
+
+CREATE TABLE `research_training` (
+  `research_training_id` int(11) NOT NULL AUTO_INCREMENT,
+  `research_training_type_id` int(11) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `trainer_id` int(11) DEFAULT NULL,
+  `material_path` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`research_training_id`),
+  CONSTRAINT `research_training_type_id_fk` FOREIGN KEY (`research_training_type_id`) REFERENCES `research_training_type` (`research_training_type_id`),
+  CONSTRAINT `trainer_id_reasearch_training_fk` FOREIGN KEY (`trainer_id`) REFERENCES `trainer` (`trainer_id`)
+);
+CREATE TABLE `research_training_enrolment` (
+  `research_training_enrolment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) DEFAULT NULL,
+  `research_training_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`research_training_enrolment_id`),
+  CONSTRAINT `research_training_enrolment_research_training_fk` FOREIGN KEY (`research_training_id`) REFERENCES `research_training` (`research_training_id`),
+  CONSTRAINT `research_training_enrolment_student_id_fk` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`)
+);
+CREATE TABLE `research_training_course_enrolment` (
+  `research_training_course_enrolment` int(11) NOT NULL AUTO_INCREMENT,
+  `research_training_enrolment_id` int(11) DEFAULT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`research_training_course_enrolment`),
+  CONSTRAINT `rt_course_enrolment_course_id_fk` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
+  CONSTRAINT `rt_course_enrolment_rt_enrolment_id_fk` FOREIGN KEY (`research_training_enrolment_id`) REFERENCES `research_training_enrolment` (`research_training_enrolment_id`)
+);
+
 
 
 

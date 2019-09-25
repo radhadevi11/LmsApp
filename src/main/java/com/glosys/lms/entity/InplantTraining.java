@@ -27,6 +27,18 @@ public class InplantTraining implements TrainingProgram{
     @JoinColumn(name="trainer_id")
     private Trainer trainer;
 
+    public InplantTraining(Integer id, InplantTrainingType inplantTrainingType, Course course, LocalDate date, Trainer trainer, String materialPath) {
+        this.id = id;
+        this.inplantTrainingType = inplantTrainingType;
+        this.course = course;
+        this.date = date;
+        this.trainer = trainer;
+        this.materialPath = materialPath;
+    }
+
+    @Column(name = "material_path")
+    private String materialPath;
+
     public InplantTraining() {
     }
 
@@ -102,8 +114,8 @@ public class InplantTraining implements TrainingProgram{
 
     @Override
     public String getDuration() {
-        return getInplantTrainingType().getTotalDays()+ " days("+"\n"+ getInplantTrainingType().getHoursPerDay()+" " +
-                "Hours per day)";
+        return getInplantTrainingType().getTotalDays()+ " days"+ getInplantTrainingType().getHoursPerDay()+" " +
+                "Hours per day";
     }
 
     @Override
@@ -114,5 +126,13 @@ public class InplantTraining implements TrainingProgram{
     @Override
     public String getUniquePath() {
         return  String.format("%s_%s_%s_%s_%s",getName(),this.inplantTrainingType.getId(), this.course.getId(), this.trainer.getId(), date);
+    }
+
+    public String getMaterialPath() {
+        return materialPath;
+    }
+
+    public void setMaterialPath(String materialPath) {
+        this.materialPath = materialPath;
     }
 }

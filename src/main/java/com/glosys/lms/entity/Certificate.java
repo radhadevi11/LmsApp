@@ -14,6 +14,7 @@ public class Certificate implements TrainingProgram {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "cost")
     private double cost;
 
     @OneToOne
@@ -26,6 +27,9 @@ public class Certificate implements TrainingProgram {
     @OneToOne
     @JoinColumn(name = "trainer_id")
     private Trainer trainer;
+
+    @Column(name = "material_path")
+    private String materialPath;
 
     public Certificate() {
     }
@@ -48,6 +52,11 @@ public class Certificate implements TrainingProgram {
 
     public Integer getId() {
         return id;
+    }
+
+    @Override
+    public String getMaterialPath() {
+        return this.materialPath;
     }
 
     public void setId(Integer id) {
@@ -109,5 +118,13 @@ public class Certificate implements TrainingProgram {
     @Override
     public String getDuration() {
         return "3 Months";
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public void setMaterialPath(String materialPath) {
+        this.materialPath = materialPath;
     }
 }

@@ -11,10 +11,12 @@ public class ResearchTrainingCourseEnrolment {
     @Column(name="id")
     private Integer id;
 
-    @Column(name = "research_training_enrolment_id")
+    @ManyToOne
+    @JoinColumn (name = "research_training_enrolment_id")
     private ResearchTrainingEnrolment researchTrainingEnrolment;
 
-    @Column(name = "course_id")
+    @ManyToOne
+    @JoinColumn(name = "course_id")
     private Course course;
 
     public ResearchTrainingCourseEnrolment() {

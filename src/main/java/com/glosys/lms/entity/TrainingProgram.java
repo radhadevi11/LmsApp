@@ -24,4 +24,8 @@ public interface TrainingProgram extends Comparable<TrainingProgram> {
     double getCost();
 
     String getUniquePath();
+
+    Integer getId();
+
+    String getMaterialPath();
 }
