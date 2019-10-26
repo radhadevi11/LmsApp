@@ -1,5 +1,7 @@
 package com.glosys.lms.entity;
 
+import java.util.List;
+
 public enum TrainingProgramTypeEnum {
     WORKSHOP(1, "Workshop"),
     INPLANT_TRAINING(2, "Inplant Training"),
@@ -33,4 +35,6 @@ public enum TrainingProgramTypeEnum {
     public String getName() {
         return name;
     }
+
+
 }

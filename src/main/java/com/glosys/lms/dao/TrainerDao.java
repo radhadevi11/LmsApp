@@ -75,4 +75,31 @@ public class TrainerDao extends AbstractDao<Trainer> {
             throw new RuntimeException("can not get all Trainers",e);
         }
     }
+    public boolean isExistingUserName(String userName) {
+
+
+        try {
+            entityManager.getTransaction().begin();
+            TypedQuery<Trainer> query = entityManager.createQuery("select count(*) from Trainer trainer where " +
+                    "trainer.userName=:userName", Trainer.class);
+            query.setParameter("userName", userName);
+            entityManager.getTransaction().commit();
+            List<Trainer> trainers = query.getResultList();
+            if(trainers.size() == 0){
+                return false;
+            }
+            else {
+                return true;
+            }
+
+        }
+        catch (Exception e){
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
+            throw new RuntimeException("Can not get existing user name",e);
+        }
+
+    }
+
 }

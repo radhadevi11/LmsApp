@@ -40,7 +40,7 @@ public class ResearchTrainingTypeDaoTest extends AbstractDaoTest {
 
     @Test
     public void testGetResearchTrainings(){
-        ResearchTrainingDao researchTrainingDao = new ResearchTrainingDao(em);
+        ResearchTrainingTypeDao researchTrainingDao = new ResearchTrainingTypeDao(em);
         researchTrainingDao.save(new ResearchTrainingType());
         List<ResearchTrainingType> actual = researchTrainingDao.getResearchTrainings();
         assertEquals(1, actual.size());

@@ -7,11 +7,5 @@ import com.glosys.lms.dao.DaoFactory;
 import java.util.List;
 
 public class ResearchTrainingService {
-    public List<ResearchTrainingType> getResearchTrainings(){
-        return DaoFactory.getResearchTrainingDao().getResearchTrainings();
-    }
 
-    public List<Course> getCoursesForResearchTraining(){
-        return DaoFactory.getCourseDao().getCoursesForResearchTraining();
-    }
 }

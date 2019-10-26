@@ -1,5 +1,7 @@
 package com.glosys.lms.dao;
 
+import com.glosys.lms.entity.ResearchTrainingType;
+
 public class DaoFactory {
 
     private static StudentDaoImpl studentDao = new StudentDaoImpl();
@@ -10,6 +12,7 @@ public class DaoFactory {
     private static InplantTrainingTypeDao inplantTrainingTypeDao = new InplantTrainingTypeDao();
     private static CorporateTrainingTypeDao corporateTrainingTypeDao = new CorporateTrainingTypeDao();
     private static ResearchTrainingDao researchTrainingDao = new ResearchTrainingDao();
+    private static ResearchTrainingTypeDao researchTrainingTypeDao = new ResearchTrainingTypeDao();
     private static AdminDao adminDao = new AdminDao();
     private static WorkshopEnrolmentDao workshopEnrolmentDao = new WorkshopEnrolmentDao();
     private static WorkshopDao workshopDao = new WorkshopDao();
@@ -71,5 +74,9 @@ public class DaoFactory {
 
     public static CertificateDao getCertificateDao() {
         return certificateDao;
+    }
+
+    public static ResearchTrainingTypeDao getResearchTrainingTypeDao() {
+        return researchTrainingTypeDao;
     }
 }

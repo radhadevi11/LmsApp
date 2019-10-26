@@ -16,23 +16,6 @@ public class ResearchTrainingDao extends AbstractDao<ResearchTrainingType> {
         super(entityManager);
     }
 
-    public List<ResearchTrainingType> getResearchTrainings(){
-        try{
-            entityManager.getTransaction().begin();
-            TypedQuery<ResearchTrainingType> typedQuery = entityManager.createQuery("SELECT rt FROM ResearchTraining rt",
-                    ResearchTrainingType.class);
-            entityManager.getTransaction().commit();
-            List<ResearchTrainingType> resultList = typedQuery.getResultList();
-            System.out.println("size of Research training "+resultList.size());
-            return resultList;
 
-        }
-        catch (Exception e){
-            if(entityManager.getTransaction().isActive()){
-                entityManager.getTransaction().rollback();
-            }
-            throw new RuntimeException("can not get ResearchTrainings", e);
-        }
-    }
 
 }
